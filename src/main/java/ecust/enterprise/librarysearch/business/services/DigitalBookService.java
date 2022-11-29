@@ -11,13 +11,8 @@ import ecust.enterprise.librarysearch.business.entities.repositories.DigitalBook
 @Service
 public class DigitalBookService
 {
-  private final DigitalBookRepository digitalBookRepository;
-  
   @Autowired
-  public DigitalBookService(DigitalBookRepository digitalBookRepository)
-  {
-    this.digitalBookRepository = digitalBookRepository;
-  }
+  private DigitalBookRepository digitalBookRepository;
   
   public List<DigitalBook> getAll()
   {
