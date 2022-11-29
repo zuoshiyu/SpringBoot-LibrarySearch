@@ -9,14 +9,19 @@
   crossorigin="anonymous">
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="common.css"> 
 <title>SEARCH</title>
 </head>
 <body>
   <div class="container mt-5">
     <h2 align="center">Search in Thymeleaf Template</h2>
-    <form th:action="@{/search}" method="get">
+    <form th:action="@{/simplesearch}" method="get">
       <input type="text" name="keyword" th:value="${keyword}"
         placeholder="Find by Key Word" size="50">
+      <select class="form-control" id="searchBy" name="psBy"> <!-- name implies the return name of the variable -->
+        <option th:each="psBy: ${psBys}" th:value="${psBy}"
+          th:text="${psBy}">
+      </select>
       <button type="submit" class="btn btn-info">Search</button>
       <button type="reset" class="btn btn-info">Reset</button>
     </form>
@@ -25,6 +30,8 @@
         <tr>
           <th>Title</th>
           <th>ISBN</th>
+          <th>Author</th>
+          <th>Publisher</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -32,6 +39,8 @@
         <tr th:each="book : ${physicalBooks}" th:field="${l}">
           <td th:text="${book.title}"></td>
           <td th:text="${book.isbn}"></td>
+          <td th:text="${book.author}"></td>
+          <td th:text="${book.publisher}"></td>
           <td>
             <a th:href="@{/check(bookId=${book.isbn})}" class="btn btn-info">Check</a>
           </td>

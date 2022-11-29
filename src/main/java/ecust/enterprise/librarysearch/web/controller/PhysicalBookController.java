@@ -1,32 +1,37 @@
 package ecust.enterprise.librarysearch.web.controller;
 
+import java.util.EnumSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ecust.enterprise.librarysearch.business.services.PhysicalBookService;
+import ecust.enterprise.librarysearch.business.util.PhysicalSearchBy;
 
 @Controller
 public class PhysicalBookController
 {
   @Autowired
   private PhysicalBookService physicalBookService;
+  private ModelAndView simpleSearchMAV = new ModelAndView("simple-search-view");
 
-  @RequestMapping("/search")
-  public ModelAndView search(String keyword)
+  @GetMapping("/simplesearch")
+  public ModelAndView simpleSearch(String keyword, PhysicalSearchBy psBy)
   {
-    ModelAndView mav = new ModelAndView("search-view");
+    simpleSearchMAV.addObject("psBys", EnumSet.allOf(PhysicalSearchBy.class));
     if (keyword == null)
     {
-      mav.addObject("physicalBooks", physicalBookService.getAll());
+      simpleSearchMAV.addObject("physicalBooks", physicalBookService.getAll());
     } 
     else
     {
-      mav.addObject("physicalBooks",
-          physicalBookService.getByKeyword(keyword));
+      simpleSearchMAV.addObject("physicalBooks",
+          physicalBookService.getBySimpleSearch(keyword, psBy));
     }
-    return mav;
+    return simpleSearchMAV;
   }
 
 }
