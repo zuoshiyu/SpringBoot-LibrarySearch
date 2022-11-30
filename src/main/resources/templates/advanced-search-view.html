@@ -14,14 +14,20 @@
 </head>
 <body>
   <div class="container mt-5">
-    <h2 align="center">Simple Search</h2>
-    <form th:action="@{/simplesearch}" method="get">
+    <h2 align="center">Advanced Search</h2>
+    <form th:action="@{/advancedsearch}" method="post">
       <input type="text" name="keyword" th:value="${keyword}"
         placeholder="Find by Key Word" size="50">
-      <select class="form-control" id="searchBy" name="filter"> <!-- name implies the return name of the variable -->
-        <option th:each="filter: ${filters}" th:value="${filter}"
-          th:text="${filter}">
-      </select>
+      <label>Fields:
+        <input type="checkbox"
+            th:each="filter : ${filterListWrapper.getList}"
+            th:name="filterListWrapper"
+              th:text="${filter}"
+              th:value="${filter}"
+            th:field="*{filterListWrapper.list}"
+        /><!-- th:value="${filter}" value means default value in the field!!! -->
+      </label>
+      
       <button type="submit" class="btn btn-info">Search</button>
       <button type="reset" class="btn btn-info">Reset</button>
     </form>
