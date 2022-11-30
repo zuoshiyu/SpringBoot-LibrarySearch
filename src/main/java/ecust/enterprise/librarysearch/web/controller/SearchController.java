@@ -1,6 +1,7 @@
 package ecust.enterprise.librarysearch.web.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ecust.enterprise.librarysearch.business.services.PhysicalBookService;
 import ecust.enterprise.librarysearch.business.util.ListWrapper;
+import ecust.enterprise.librarysearch.business.util.TextFilter;
 import ecust.enterprise.librarysearch.business.util.Filter;
 
 @Controller
@@ -60,7 +62,6 @@ public class SearchController
   public ModelAndView advancedSearch(String keyword, @ModelAttribute ListWrapper<String> filterListWrapper)
   {
     ModelAndView mav = new ModelAndView("advanced-search-view");
-
     mav.addObject("physicalBooks",
         physicalBookService.getByAdvancedSearch(keyword,
             filterListWrapper.getList().stream().map(Filter::valueOf)
@@ -73,5 +74,21 @@ public class SearchController
     return mav;
   }
   
-  
+  @GetMapping("/textsearch")
+  public ModelAndView textSearch(String keyword, TextFilter textFilter)
+  {
+    ModelAndView mav = new ModelAndView("text-search-view");
+
+    if (keyword == null)
+    {
+      mav.addObject("physicalBooks", physicalBookService.getAll());
+    } 
+    else 
+    {
+      mav.addObject("physicalBooks", physicalBookService.getByTextSearch(keyword, textFilter));
+    }
+    mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
+
+    return mav;
+  }
 }

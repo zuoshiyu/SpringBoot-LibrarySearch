@@ -18,17 +18,28 @@ public interface PhysicalBookRepository extends JpaRepository<PhysicalBook, Stri
       + " ELSE NULL\n"
       + " END\n";
   
+  @Query(nativeQuery = true, value = "SELECT * FROM physical_book x WHERE x.title = :keyword "
+      + "or x.author = :keyword "
+      + "or x.publisher = :keyword "
+      + "or x.isbn = :keyword ")
+  List<PhysicalBook> findByKeywordAccurate(@Param("keyword") String keyword);
+  
+  @Query(nativeQuery = true, value = "SELECT * FROM physical_book x WHERE x.title LIKE :keyword% "
+      + "or x.author LIKE :keyword% "
+      + "or x.publisher LIKE :keyword% "
+      + "or x.isbn LIKE :keyword% ")
+  List<PhysicalBook> findByKeywordBegin(@Param("keyword") String keyword);
+  
   @Query(nativeQuery = true, value = "SELECT * FROM physical_book x WHERE x.title LIKE %:keyword% "
       + "or x.author LIKE %:keyword% "
       + "or x.publisher LIKE %:keyword% "
-      + "or x.subtitle LIKE %:keyword% ")
-  List<PhysicalBook> findByKeyword(@Param("keyword") String keyword);
+      + "or x.isbn LIKE %:keyword% ")
+  List<PhysicalBook> findByKeywordInclude(@Param("keyword") String keyword);
   
-
-  @Query(value = "SELECT * FROM physical_book x WHERE " + CASE_STRING + " LIKE %:keyword%", nativeQuery = true)
+  @Query(value = "SELECT * FROM physical_book x WHERE " + CASE_STRING + " = :keyword", nativeQuery = true)
   List<PhysicalBook> findByFieldAccurate(@Param("keyword") String keyword, @Param("field") String field);
 
-  @Query(value = "SELECT * FROM physical_book x WHERE " + CASE_STRING + " LIKE %:keyword%", nativeQuery = true)
+  @Query(value = "SELECT * FROM physical_book x WHERE " + CASE_STRING + " LIKE :keyword%", nativeQuery = true)
   List<PhysicalBook> findByFieldBegin(@Param("keyword") String keyword, @Param("field") String field);
   
   @Query(value = "SELECT * FROM physical_book x WHERE " + CASE_STRING + " LIKE %:keyword%", nativeQuery = true)

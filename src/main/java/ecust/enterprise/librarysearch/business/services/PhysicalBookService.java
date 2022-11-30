@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 import ecust.enterprise.librarysearch.business.entities.repositories.PhysicalBookRepository;
 import ecust.enterprise.librarysearch.business.util.Filter;
+import ecust.enterprise.librarysearch.business.util.TextFilter;
 
 @Service
 public class PhysicalBookService
@@ -24,14 +25,12 @@ public class PhysicalBookService
   
   public List<PhysicalBook> getByKeyword(String keyword)
   {
-    return physicalBookRepository.findByKeyword(keyword);
+    return physicalBookRepository.findByKeywordInclude(keyword);
   }
   
   public List<PhysicalBook> getBySimpleSearch(String keyword, Filter psBy)
   {
-    List<PhysicalBook> retList = null;
-    retList = physicalBookRepository.findByFieldInclude(keyword, psBy.toString());
-    return retList;
+    return physicalBookRepository.findByFieldInclude(keyword, psBy.toString());
   }
   
   public List<PhysicalBook> getByAdvancedSearch(String keyword, List<Filter> filters)
@@ -52,4 +51,24 @@ public class PhysicalBookService
     return retList;
   }
   
+  public List<PhysicalBook> getByTextSearch(String keyword, TextFilter textFilter)
+  {
+    List<PhysicalBook> retList = new ArrayList<PhysicalBook>();
+  
+    switch (textFilter.toString())
+    {
+      case "ACCURATE":
+        retList = physicalBookRepository.findByKeywordAccurate(keyword);
+        break;
+      case "BEGIN":
+        retList = physicalBookRepository.findByKeywordBegin(keyword);
+        break;
+      case "INCLUDE":
+        retList = physicalBookRepository.findByKeywordInclude(keyword);
+        break;
+      default:
+        break;
+    }
+    return retList;
+  }
 }
