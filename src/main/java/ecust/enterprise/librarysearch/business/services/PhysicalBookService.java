@@ -3,6 +3,7 @@ package ecust.enterprise.librarysearch.business.services;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,5 +71,11 @@ public class PhysicalBookService
         break;
     }
     return retList;
+  }
+  
+  public PhysicalBook getByISBN(String isbn)
+  {
+    Optional<PhysicalBook> bookOptional = physicalBookRepository.findById(isbn);
+    return bookOptional.isEmpty() ? null : bookOptional.get();  // Optional throws exception so you need this
   }
 }

@@ -9,7 +9,7 @@
   crossorigin="anonymous">
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="common.css"> 
+<link rel="stylesheet" href="css/common.css"> 
 <title>SEARCH</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
           <td th:text="${book.author}"></td>
           <td th:text="${book.publisher}"></td>
           <td>
-            <a th:href="@{/check(bookId=${book.isbn})}" class="btn btn-info">Check</a>
+            <a th:href="@{/book-info(bookId=${book.isbn})}" class="btn btn-info">Check</a>
           </td>
         </tr>
       </tbody>

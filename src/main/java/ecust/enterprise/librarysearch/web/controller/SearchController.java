@@ -52,7 +52,7 @@ public class SearchController
     mav.addObject("filterListWrapper",
         new ListWrapper<String>(
             new ArrayList<String>(EnumSet.allOf(Filter.class)
-                .stream().map(Filter::getValue).toList())));
+                .stream().map(Filter::toString).toList())));
     return mav;
   }
   
@@ -67,7 +67,7 @@ public class SearchController
     mav.addObject("filterListWrapper",
         new ListWrapper<String>(
             new ArrayList<String>(EnumSet.allOf(Filter.class)
-                .stream().map(Filter::getValue).toList())));
+                .stream().map(Filter::toString).toList())));
     hotWordService.update(keyword);
     
     return mav;
