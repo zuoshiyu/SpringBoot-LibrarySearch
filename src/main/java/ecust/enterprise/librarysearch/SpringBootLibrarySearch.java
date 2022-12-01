@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootDtoTutorialApplication {
+public class SpringBootLibrarySearch {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootDtoTutorialApplication.class, args);
+		SpringApplication.run(SpringBootLibrarySearch.class, args);
 	}
 }
