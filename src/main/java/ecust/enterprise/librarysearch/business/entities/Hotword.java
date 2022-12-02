@@ -2,8 +2,6 @@ package ecust.enterprise.librarysearch.business.entities;
 
 import java.util.Date;
 
-import org.apache.catalina.User;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;

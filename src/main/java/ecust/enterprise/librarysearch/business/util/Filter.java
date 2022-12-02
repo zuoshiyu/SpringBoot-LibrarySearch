@@ -5,5 +5,8 @@ public enum Filter
   title,
   author,
   isbn,
-  publisher;
+  publisher,
+  type,
+  language,
+  subtitle;
 }

@@ -24,7 +24,7 @@ public class PhysicalBook
   private String author;
   private String publisher;
   private String publocation;
-  private String pubdate;
+  private int pubdate;
   private int pagenum;
   @Id
   private String isbn;
