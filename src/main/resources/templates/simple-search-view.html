@@ -18,7 +18,7 @@
     <form th:action="@{/simplesearch}" method="get">
       <input type="text" name="keyword" th:value="${keyword}"
         placeholder="Find by Key Word" size="50">
-      <select class="form-control" id="searchBy" name="filter"> <!-- name implies the return name of the variable -->
+      <select class="form-control" id="filter" name="filter"> <!-- name implies the return name of the variable -->
         <option th:each="filter: ${filters}" th:value="${filter}"
           th:text="${filter}">
       </select>

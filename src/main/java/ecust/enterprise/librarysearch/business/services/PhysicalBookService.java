@@ -1,7 +1,9 @@
 package ecust.enterprise.librarysearch.business.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,9 +75,56 @@ public class PhysicalBookService
     return retList;
   }
   
+  public List<PhysicalBook> getByOverSearch(String keyword, List<Filter> filters, TextFilter textFilter, int year)
+  {
+    List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp = null;
+    
+    for (Filter filter : filters)
+    {
+      switch (textFilter.toString())
+      {
+        case "ACCURATE":
+          temp = physicalBookRepository.findByFieldAccurate(keyword, filter.toString());
+          break;
+        case "BEGIN":
+          temp = physicalBookRepository.findByKeywordBegin(keyword);
+          break;
+        case "INCLUDE":
+          temp = physicalBookRepository.findByKeywordInclude(keyword);
+          break;
+        default:
+          break;
+      }
+      if (!temp.isEmpty())
+      {
+        retList.addAll(temp);
+      }
+    }
+    
+    retList = filterAfterDate(retList, year);
+    return retList;
+  }
+  
   public PhysicalBook getByISBN(String isbn)
   {
     Optional<PhysicalBook> bookOptional = physicalBookRepository.findById(isbn);
     return bookOptional.isEmpty() ? null : bookOptional.get();  // Optional throws exception so you need this
   }
+  
+  public List<PhysicalBook> filterAfterDate(List<PhysicalBook> list, int year)
+  {
+    List<PhysicalBook> retList = new ArrayList<PhysicalBook>();
+    if (!list.isEmpty())
+    {
+      for (PhysicalBook physicalBook : list)
+      {
+        if (physicalBook.getPubdate() > year)
+        {
+          retList.add(physicalBook);
+        }
+      }
+    }
+    return retList;
+  }
+  
 }
