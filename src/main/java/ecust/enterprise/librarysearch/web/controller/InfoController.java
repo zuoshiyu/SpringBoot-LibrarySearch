@@ -1,7 +1,10 @@
 package ecust.enterprise.librarysearch.web.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +48,14 @@ public class InfoController
       mav.addObject("digitalLink", digitalBook.getBookurl());
     }
     
+    
     try
     {
+      Path uploadPath = new File("qrcode").toPath();
+      if (!Files.exists(uploadPath))
+      {
+        Files.createDirectories(uploadPath);
+      }
       QRCodeCreator.createQRCodeForObject(physicalBook, physicalBook.getQRCodePath());
     }
     catch (WriterException | IOException e)
