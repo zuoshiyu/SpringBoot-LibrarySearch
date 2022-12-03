@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
 import ecust.enterprise.librarysearch.business.services.HotWordService;
-import ecust.enterprise.librarysearch.business.services.PhysicalBookService;
+import ecust.enterprise.librarysearch.business.services.SearchService;
 import ecust.enterprise.librarysearch.business.util.Filter;
 import ecust.enterprise.librarysearch.business.util.ListWrapper;
 import ecust.enterprise.librarysearch.business.util.TextFilter;
@@ -24,25 +24,23 @@ import ecust.enterprise.librarysearch.business.util.TextFilter;
 public class SearchController
 {
   @Autowired
-  private PhysicalBookService physicalBookService;
-  @Autowired
-  private DigitalBookService digitalBookService;
+  private SearchService searchService;
   @Autowired
   private HotWordService hotWordService;
 
   @GetMapping("/simplesearch")
   public ModelAndView simpleSearch(String keyword, Filter filter)  {
-    ModelAndView mav = new ModelAndView("simple-search-view");
+    ModelAndView mav = new ModelAndView("search/simple-search-view");
     
     mav.addObject("filters", EnumSet.allOf(Filter.class));
     if (keyword == null)
     {
-      mav.addObject("physicalBooks", physicalBookService.getAll());
+      mav.addObject("physicalBooks", searchService.getAll());
     } 
     else
     {
       mav.addObject("physicalBooks",
-          physicalBookService.getBySimpleSearch(keyword, filter));
+          searchService.getBySimpleSearch(keyword, filter));
       mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
     }
@@ -52,8 +50,8 @@ public class SearchController
   @GetMapping("/advancedsearch")
   public ModelAndView showAdvancedSearch()
   {
-    ModelAndView mav = new ModelAndView("advanced-search-view");
-    mav.addObject("physicalBooks", physicalBookService.getAll());
+    ModelAndView mav = new ModelAndView("search/advanced-search-view");
+    mav.addObject("physicalBooks", searchService.getAll());
     mav.addObject("filterListWrapper",
         new ListWrapper<String>(
             new ArrayList<String>(EnumSet.allOf(Filter.class)
@@ -65,9 +63,9 @@ public class SearchController
   public ModelAndView advancedSearch(String keyword,
       @ModelAttribute("filterListWrapper") ListWrapper<String> filterListWrapper)
   {
-    ModelAndView mav = new ModelAndView("advanced-search-view");
+    ModelAndView mav = new ModelAndView("search/advanced-search-view");
     mav.addObject("physicalBooks",
-        physicalBookService.getByAdvancedSearch(keyword,
+        searchService.getByAdvancedSearch(keyword,
             filterListWrapper.getList().stream().map(Filter::valueOf)
                 .toList()));
     mav.addObject("filterListWrapper",
@@ -83,15 +81,15 @@ public class SearchController
   @GetMapping("/textsearch")
   public ModelAndView textSearch(String keyword, TextFilter textFilter)
   {
-    ModelAndView mav = new ModelAndView("text-search-view");
+    ModelAndView mav = new ModelAndView("search/text-search-view");
 
     if (keyword == null)
     {
-      mav.addObject("physicalBooks", physicalBookService.getAll());
+      mav.addObject("physicalBooks", searchService.getAll());
     } 
     else 
     {
-      mav.addObject("physicalBooks", physicalBookService.getByTextSearch(keyword, textFilter));
+      mav.addObject("physicalBooks", searchService.getByTextSearch(keyword, textFilter));
       mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
     }
@@ -103,15 +101,15 @@ public class SearchController
   @GetMapping("/hotwordsearch")
   public ModelAndView hotwordSearch(String keyword)
   {
-    ModelAndView mav = new ModelAndView("hotword-search-view");
+    ModelAndView mav = new ModelAndView("search/hotword-search-view");
     
     if (keyword == null)
     {
-      mav.addObject("physicalBooks", physicalBookService.getAll());
+      mav.addObject("physicalBooks", searchService.getAll());
     } 
     else
     {
-      mav.addObject("physicalBooks", physicalBookService.getByKeyword(keyword));
+      mav.addObject("physicalBooks", searchService.getByKeyword(keyword));
       mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
     }
@@ -123,8 +121,8 @@ public class SearchController
   @GetMapping("/oversearch")
   public ModelAndView showOverSearch()
   {
-    ModelAndView mav = new ModelAndView("over-search-view");
-    mav.addObject("physicalBooks", physicalBookService.getAll());
+    ModelAndView mav = new ModelAndView("search/over-search-view");
+    mav.addObject("physicalBooks", searchService.getAll());
     mav.addObject("filterListWrapper",
         new ListWrapper<String>(
             new ArrayList<String>(EnumSet.allOf(Filter.class)
@@ -140,9 +138,9 @@ public class SearchController
       @ModelAttribute("filterListWrapper") ListWrapper<String> filterListWrapper,
       TextFilter textFilter, String date)
   {
-    ModelAndView mav = new ModelAndView("over-search-view");
+    ModelAndView mav = new ModelAndView("search/over-search-view");
     mav.addObject("physicalBooks",
-        physicalBookService.getByOverSearch(keyword,
+        searchService.getByOverSearch(keyword,
             filterListWrapper.getList().stream().map(Filter::valueOf).toList(), textFilter,
             // the request consists of only string type objects so you need to convert manually
             convertDateToYear(date)));

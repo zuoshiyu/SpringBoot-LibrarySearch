@@ -10,6 +10,6 @@ import ecust.enterprise.librarysearch.business.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long>
 {
-  @Query(nativeQuery = true, value = "SELECT * FROM user x WHERE x.user_name = :name")
+  @Query(nativeQuery = true, value = "SELECT * FROM user x WHERE x.username = :name")
   Optional<User> findByName(@Param("name") String name);
 }

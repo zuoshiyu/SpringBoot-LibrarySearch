@@ -33,7 +33,6 @@ public class QRCodeCreator
 
   public static void createQRCodeForObject(Object object, String path) throws WriterException, IOException
   {
-    // data that we want to store in the QR code
     String data = "Default String";
     if (object != null)
     {
@@ -45,9 +44,6 @@ public class QRCodeCreator
     JSONObject jsonObject = new JSONObject(map);
     String json = jsonObject.toString();
 
-    // invoking the user-defined method that creates the QR code
     generateQRCodeImage(json, 200, 200, path);
-    // prints if the QR code is generated
-    System.out.println("QR Code created successfully.");
   }
 }

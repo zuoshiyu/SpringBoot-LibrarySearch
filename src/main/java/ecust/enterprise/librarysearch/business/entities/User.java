@@ -25,7 +25,7 @@ public class User implements UserDetails
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private String userName;
+  private String username;
   private String password;
   private String roles;
   @Transient
@@ -33,19 +33,9 @@ public class User implements UserDetails
 
   public User() {}
   
-  public User(String userName, String password, String roles)
-  {
-    this.userName = userName;
-    this.password = password;
-    this.roles = roles;
-    this.authorities = Arrays.stream(roles.split(","))
-        .map(SimpleGrantedAuthority::new)
-        .collect(Collectors.toList());
-  }
-  
   public User(User user)
   {
-    this.userName = user.getUsername();
+    this.username = user.getUsername();
     this.password = user.getPassword();
     this.roles = user.getRoles();
     this.authorities = Arrays.stream(user.getRoles().split(","))
@@ -74,16 +64,26 @@ public class User implements UserDetails
   {
     this.password = password;
   }
+  
+  public long getId()
+  {
+    return id;
+  }
+
+  public void setId(long id)
+  {
+    this.id = id;
+  }
 
   @Override
   public String getUsername()
   {
-    return userName;
+    return username;
   }
 
-  public void setUserName(String userName)
+  public void setUsername(String userName)
   {
-    this.userName = userName;
+    this.username = userName;
   }
   
   public String getRoles()

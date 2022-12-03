@@ -1,9 +1,5 @@
 package ecust.enterprise.librarysearch.business.services;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,119 +8,50 @@ import org.springframework.stereotype.Service;
 
 import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 import ecust.enterprise.librarysearch.business.entities.repositories.PhysicalBookRepository;
-import ecust.enterprise.librarysearch.business.util.Filter;
-import ecust.enterprise.librarysearch.business.util.TextFilter;
 
 @Service
 public class PhysicalBookService
 {
+  private final PhysicalBookRepository physicalBookRepository;
+
   @Autowired
-  private PhysicalBookRepository physicalBookRepository;
-  
-  public List<PhysicalBook> getAll() 
+  public PhysicalBookService(
+      PhysicalBookRepository physicalBookRepository)
+  {
+    this.physicalBookRepository = physicalBookRepository;
+  }
+
+  public List<PhysicalBook> getAll()
   {
     return physicalBookRepository.findAll();
   }
-  
-  public List<PhysicalBook> getByKeyword(String keyword)
+
+  public PhysicalBook getById(String id)
   {
-    return physicalBookRepository.findByKeywordInclude(keyword);
+    Optional<PhysicalBook> physicalBookOptional = physicalBookRepository
+        .findById(id);
+    physicalBookOptional.orElseThrow(
+        () -> new IllegalStateException("PhysicalBook doesn't exist!"));
+    return physicalBookOptional.get();
   }
-  
-  public List<PhysicalBook> getBySimpleSearch(String keyword, Filter psBy)
+
+  public void add(PhysicalBook physicalBook)
   {
-    return physicalBookRepository.findByFieldInclude(keyword, psBy.toString());
+    physicalBookRepository.save(physicalBook);
   }
-  
-  public List<PhysicalBook> getByAdvancedSearch(String keyword, List<Filter> filters)
+
+  public void deleteById(String id)
   {
-    List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp;
-    for (Filter filter : filters)
-    {
-      temp = getBySimpleSearch(keyword, filter);
-      if (!temp.isEmpty())
-      {
-        retList.addAll(temp);
-      }
-    }
-    if (!retList.isEmpty())
-    {
-      retList = new ArrayList<>(new HashSet<>(retList));  // Remove duplicates
-    }
-    return retList;
+    physicalBookRepository.deleteById(id);
   }
-  
-  public List<PhysicalBook> getByTextSearch(String keyword, TextFilter textFilter)
+
+  public void update(PhysicalBook physicalBook)
   {
-    List<PhysicalBook> retList = new ArrayList<PhysicalBook>();
-  
-    switch (textFilter.toString())
-    {
-      case "ACCURATE":
-        retList = physicalBookRepository.findByKeywordAccurate(keyword);
-        break;
-      case "BEGIN":
-        retList = physicalBookRepository.findByKeywordBegin(keyword);
-        break;
-      case "INCLUDE":
-        retList = physicalBookRepository.findByKeywordInclude(keyword);
-        break;
-      default:
-        break;
-    }
-    return retList;
+    Optional<PhysicalBook> physicalBookOptional = physicalBookRepository
+        .findById(physicalBook.getIsbn());
+    physicalBookOptional.orElseThrow(
+        () -> new IllegalStateException("PhysicalBook doesn't exist!"));
+
+    physicalBookRepository.save(physicalBook);
   }
-  
-  public List<PhysicalBook> getByOverSearch(String keyword, List<Filter> filters, TextFilter textFilter, int year)
-  {
-    List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp = null;
-    
-    for (Filter filter : filters)
-    {
-      switch (textFilter.toString())
-      {
-        case "ACCURATE":
-          temp = physicalBookRepository.findByFieldAccurate(keyword, filter.toString());
-          break;
-        case "BEGIN":
-          temp = physicalBookRepository.findByKeywordBegin(keyword);
-          break;
-        case "INCLUDE":
-          temp = physicalBookRepository.findByKeywordInclude(keyword);
-          break;
-        default:
-          break;
-      }
-      if (!temp.isEmpty())
-      {
-        retList.addAll(temp);
-      }
-    }
-    
-    retList = filterAfterDate(retList, year);
-    return retList;
-  }
-  
-  public PhysicalBook getByISBN(String isbn)
-  {
-    Optional<PhysicalBook> bookOptional = physicalBookRepository.findById(isbn);
-    return bookOptional.isEmpty() ? null : bookOptional.get();  // Optional throws exception so you need this
-  }
-  
-  public List<PhysicalBook> filterAfterDate(List<PhysicalBook> list, int year)
-  {
-    List<PhysicalBook> retList = new ArrayList<PhysicalBook>();
-    if (!list.isEmpty())
-    {
-      for (PhysicalBook physicalBook : list)
-      {
-        if (physicalBook.getPubdate() > year)
-        {
-          retList.add(physicalBook);
-        }
-      }
-    }
-    return retList;
-  }
-  
 }
