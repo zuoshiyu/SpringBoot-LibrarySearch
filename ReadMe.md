@@ -9,4 +9,6 @@ Supported edit url: ~/showEntitys, ~/addEntity, ~/updatEntity
 Supported Entity: PhysicalBook, DigitalBook, User
 
 You might need to login with username: user and password: test  
-before allowed accessing the urls 
+before allowed accessing the search urls
+Or username: admin and password: test
+before allowed accessing the edit urls

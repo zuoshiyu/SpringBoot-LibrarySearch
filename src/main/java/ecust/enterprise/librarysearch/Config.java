@@ -61,8 +61,8 @@ public class Config implements WebMvcConfigurer
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests()
-    .requestMatchers("/physicalBook/*", "/digitalBook/*", "/user/*").hasRole("ADMIN")
-    .requestMatchers("/search/*").hasRole("USER")
+    .requestMatchers("/show*", "/add*", "/update*").hasRole("ADMIN") 
+    .requestMatchers("/*search").hasRole("USER")
     .requestMatchers("/", "static/**").permitAll()
     .and().formLogin();
     return http.build();
