@@ -33,6 +33,7 @@ public class SearchController
   @GetMapping("/simplesearch")
   public ModelAndView simpleSearch(String keyword, Filter filter)  {
     ModelAndView mav = new ModelAndView("simple-search-view");
+    
     mav.addObject("filters", EnumSet.allOf(Filter.class));
     if (keyword == null)
     {
@@ -42,6 +43,7 @@ public class SearchController
     {
       mav.addObject("physicalBooks",
           physicalBookService.getBySimpleSearch(keyword, filter));
+      mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
     }
     return mav;
@@ -72,6 +74,7 @@ public class SearchController
         new ListWrapper<String>(
             new ArrayList<String>(EnumSet.allOf(Filter.class)
                 .stream().map(Filter::toString).toList())));
+    mav.addObject("keyword", keyword);
     hotWordService.update(keyword);
     
     return mav;
@@ -89,6 +92,7 @@ public class SearchController
     else 
     {
       mav.addObject("physicalBooks", physicalBookService.getByTextSearch(keyword, textFilter));
+      mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
     }
     mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
@@ -108,6 +112,7 @@ public class SearchController
     else
     {
       mav.addObject("physicalBooks", physicalBookService.getByKeyword(keyword));
+      mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
     }
     mav.addObject("hotwords", hotWordService.getWithinMonth());
@@ -146,6 +151,7 @@ public class SearchController
             new ArrayList<String>(EnumSet.allOf(Filter.class)
                 .stream().map(Filter::toString).toList())));
     mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
+    mav.addObject("keyword", keyword);
     mav.addObject("hotwords", hotWordService.getWithinMonth());
     
     return mav;

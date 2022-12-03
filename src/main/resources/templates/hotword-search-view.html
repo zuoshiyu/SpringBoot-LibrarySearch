@@ -18,7 +18,7 @@
     <form th:action="@{/hotwordsearch}" method="get">
       <select class="form-control" id="hotword" name="keyword"> 
         <option th:each="hotword: ${hotwords}" th:value="${hotword.name}"
-          th:text="${hotword.name} + ' Searched Times' +${hotword.useCount}">
+          th:text="${hotword.name} + '  Searched Times:  ' +${hotword.useCount}">
       </select>
       <button type="submit" class="btn btn-info">Search</button>
       <button type="reset" class="btn btn-info">Reset</button>
