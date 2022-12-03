@@ -1,8 +1,11 @@
 package ecust.enterprise.librarysearch.business.services;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +26,9 @@ public class HotWordService
   
   public List<Hotword> getWithinMonth()
   {
-    return hotwordRepository.findWithinMonth(new Date(System.currentTimeMillis()));
+    return hotwordRepository
+        .findWithinMonth(new Date(System.currentTimeMillis())).stream()
+        .sorted().collect(Collectors.toList());
   }
   
   public void update(String keyword)
