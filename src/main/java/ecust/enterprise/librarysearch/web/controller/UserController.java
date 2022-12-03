@@ -38,7 +38,7 @@ public class UserController {
 	public String addUser(
 			@ModelAttribute User newUser) {
 		userService.add(newUser);
-		// At least redirect! Or there's nothing to show.
+		
 		return "redirect:/showUsers";
 	}
 	

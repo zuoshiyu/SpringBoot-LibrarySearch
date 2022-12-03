@@ -39,7 +39,7 @@ public class PhysicalBookController {
 	public String addPhysicalBook(
 			@ModelAttribute PhysicalBook newPhysicalBook) {
 		physicalBookService.add(newPhysicalBook);
-		// At least redirect! Or there's nothing to show.
+		
 		return "redirect:/showPhysicalBooks";
 	}
 	

@@ -52,9 +52,19 @@ public class Config implements WebMvcConfigurer
 //    return userService;
 //  }
   
+  /**
+   * Sets up authorization rules
+   * @param http
+   * @return
+   * @throws Exception
+   */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests().requestMatchers("/**").hasRole("USER").and().formLogin();
+    http.authorizeHttpRequests()
+    .requestMatchers("/physicalBook/*", "/digitalBook/*", "/user/*").hasRole("ADMIN")
+    .requestMatchers("/search/*").hasRole("USER")
+    .requestMatchers("/", "static/**").permitAll()
+    .and().formLogin();
     return http.build();
   }
   

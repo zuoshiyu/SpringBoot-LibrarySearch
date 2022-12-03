@@ -38,7 +38,7 @@ public class DigitalBookController {
 	public String addDigitalBook(
 			@ModelAttribute DigitalBook newDigitalBook) {
 		digitalBookService.add(newDigitalBook);
-		// At least redirect! Or there's nothing to show.
+		
 		return "redirect:/showDigitalBooks";
 	}
 	

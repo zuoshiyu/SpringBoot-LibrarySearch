@@ -31,6 +31,14 @@ public class QRCodeCreator
     MatrixToImageWriter.writeToPath(bitMatrix, "PNG", new File(filePath).toPath());
 }
 
+  /**
+   * Given an object, this method will create a QRCode with defined path
+   * the data inside the QRCode is object.toString()
+   * @param object
+   * @param path example: qrcode/ISBN.png
+   * @throws WriterException
+   * @throws IOException
+   */
   public static void createQRCodeForObject(Object object, String path) throws WriterException, IOException
   {
     String data = "Default String";
