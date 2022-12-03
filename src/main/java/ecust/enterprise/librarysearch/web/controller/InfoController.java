@@ -19,7 +19,6 @@ import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
 import ecust.enterprise.librarysearch.business.services.HotWordService;
 import ecust.enterprise.librarysearch.business.services.PhysicalBookService;
-import ecust.enterprise.librarysearch.business.util.FileUtil;
 import ecust.enterprise.librarysearch.business.util.QRCodeCreator;
 
 @Controller
