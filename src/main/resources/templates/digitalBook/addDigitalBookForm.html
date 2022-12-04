@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Show Digital Books</title>
+<title>Add DigitalBook</title>
 <link
 	rel="stylesheet"
 	type="text/css"
@@ -15,24 +16,23 @@
 </head>
 <body>
 	<div class="container mt-4">
-		<table
-			class="table table-borded table-striped"
-			id="digital-book-table">
-			<thead>
-				<tr>
-					<th>Title</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="digitalBook: ${digitalBooks}">
-					<!-- IMPORTANT! This is how you access an attribute from the ModelAndView object of according method in  
-					the controller-->
-					<td
-						th:text="${digitalBook.getTitle()}">
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<form th:action="@{/addDigitalBook}" 
+			th:object="${newDigitalBook}" 
+			method="post">
+		
+			<input type="text" th:field="*{title}" 
+				placeholder="Enter digitalBook name " 
+				class="form-control col-4 mb-4" />
+			
+			<input type="hidden" th:field="*{isbn}" 
+				placeholder="" 
+				class="form-control col-4 mb-4" />
+			
+			<button 
+				class="btn btn-primary" 
+				type="submit">Save</button>
+			
+		</form>	
 	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

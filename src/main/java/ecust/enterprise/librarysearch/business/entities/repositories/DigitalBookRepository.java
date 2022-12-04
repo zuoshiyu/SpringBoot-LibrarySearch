@@ -9,6 +9,4 @@ import ecust.enterprise.librarysearch.business.entities.DigitalBook;
 
 public interface DigitalBookRepository extends JpaRepository<DigitalBook, String>
 {
-//  @Query("SELECT s FROM DigitalBook s WHERE s.isbn = ?1")
-//  List<DigitalBook> findByIsbn(String isbn);
 }

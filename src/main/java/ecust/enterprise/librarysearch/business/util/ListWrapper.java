@@ -4,6 +4,13 @@ import java.util.List;
 
 import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 
+/**
+ * Wrapper class for wrapping list inside http request body
+ * @author Nolightleft
+ *
+ * @param <T>
+ * 
+ */
 public class ListWrapper<T>
 {
   private List<T> list;

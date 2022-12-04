@@ -40,7 +40,8 @@ public class HotWordService
     {
       temp.get().update();
     }
-    else {
+    else 
+    {
       hotwordRepository.save(new Hotword(keyword, 1, new Date(System.currentTimeMillis())));
     }
   }

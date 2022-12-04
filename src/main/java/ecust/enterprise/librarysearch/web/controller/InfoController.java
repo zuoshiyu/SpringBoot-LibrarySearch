@@ -18,15 +18,14 @@ import ecust.enterprise.librarysearch.business.entities.DigitalBook;
 import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
 import ecust.enterprise.librarysearch.business.services.HotWordService;
-import ecust.enterprise.librarysearch.business.services.PhysicalBookService;
-import ecust.enterprise.librarysearch.business.util.FileUtil;
+import ecust.enterprise.librarysearch.business.services.SearchService;
 import ecust.enterprise.librarysearch.business.util.QRCodeCreator;
 
 @Controller
 public class InfoController
 {
   @Autowired
-  private PhysicalBookService physicalBookService;
+  private SearchService physicalBookService;
   @Autowired
   private DigitalBookService digitalBookService;
   @Autowired
@@ -38,16 +37,11 @@ public class InfoController
     ModelAndView mav = new ModelAndView("book-info-view");
     PhysicalBook physicalBook = physicalBookService.getByISBN(bookId);
     mav.addObject("book", physicalBook);
-    DigitalBook digitalBook = digitalBookService.getByISBN(bookId);
-    if (digitalBook == null)
-    {
-      mav.addObject("digitalLink", "There's no online version for this book yet");
-    }
-    else 
+    DigitalBook digitalBook = digitalBookService.getById(bookId);
+    if (digitalBook != null)
     {
       mav.addObject("digitalLink", digitalBook.getBookurl());
     }
-    
     
     try
     {
@@ -63,11 +57,5 @@ public class InfoController
       e.printStackTrace();
     }
     return mav;
-  }
-  
-  @GetMapping("/There's no online version for this book yet")
-  public String noOnlineBook()
-  {
-    return "redirect:simplesearch";
   }
 }

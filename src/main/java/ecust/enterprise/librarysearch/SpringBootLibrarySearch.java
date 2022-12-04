@@ -4,9 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootLibrarySearch {
+public class SpringBootLibrarySearch
+{
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootLibrarySearch.class, args);
-	}
+  public static void main(String[] args)
+  {
+    SpringApplication.run(SpringBootLibrarySearch.class, args);
+  }
 }

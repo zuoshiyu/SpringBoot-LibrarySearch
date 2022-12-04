@@ -47,5 +47,5 @@ public interface PhysicalBookRepository extends JpaRepository<PhysicalBook, Stri
   
   @Query(value = "SELECT * FROM physical_book x WHERE " + CASE_STRING + " LIKE %:keyword%", nativeQuery = true)
   List<PhysicalBook> findByFieldInclude(@Param("keyword") String keyword, @Param("field") String field);
-  // use native query, and you use actual table name 
+  // use native query, and you should use actual table name 
 }

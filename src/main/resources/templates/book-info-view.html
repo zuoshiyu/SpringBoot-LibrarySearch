@@ -42,7 +42,7 @@
     <h2>QR Code</h2>
     <img alt="QRCode" class="img-responsive" th:src="${book.getQRCodePath()}"/>
     <h2>Digital Book</h2>
-    <a th:text="${digitalLink}" th:href="${digitalLink}">Digital Book</a>
+    <a th:text="${digitalLink}" th:href="${digitalLink}" href="/simplesearch"> </a>
   </div>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"

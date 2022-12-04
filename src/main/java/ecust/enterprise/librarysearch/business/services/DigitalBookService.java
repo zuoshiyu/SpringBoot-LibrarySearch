@@ -12,17 +12,45 @@ import ecust.enterprise.librarysearch.business.entities.repositories.DigitalBook
 @Service
 public class DigitalBookService
 {
+  private final DigitalBookRepository digitalBookRepository;
+
   @Autowired
-  private DigitalBookRepository digitalBookRepository;
-  
+  public DigitalBookService(DigitalBookRepository digitalBookRepository)
+  {
+    this.digitalBookRepository = digitalBookRepository;
+  }
+
   public List<DigitalBook> getAll()
   {
     return digitalBookRepository.findAll();
   }
-  
-  public DigitalBook getByISBN(String isbn)
+
+  public DigitalBook getById(String id)
   {
-    Optional<DigitalBook> bookOptional = digitalBookRepository.findById(isbn);
-    return bookOptional.isPresent() ? bookOptional.get() : null;
+    Optional<DigitalBook> digitalBookOptional = digitalBookRepository
+        .findById(id);
+    digitalBookOptional.orElseThrow(
+        () -> new IllegalStateException("DigitalBook doesn't exist!"));
+    return digitalBookOptional.get();
+  }
+
+  public void add(DigitalBook digitalBook)
+  {
+    digitalBookRepository.save(digitalBook);
+  }
+
+  public void deleteById(String id)
+  {
+    digitalBookRepository.deleteById(id);
+  }
+
+  public void update(DigitalBook digitalBook)
+  {
+    Optional<DigitalBook> digitalBookOptional = digitalBookRepository
+        .findById(digitalBook.getIsbn());
+    digitalBookOptional.orElseThrow(
+        () -> new IllegalStateException("DigitalBook doesn't exist!"));
+
+    digitalBookRepository.save(digitalBook);
   }
 }

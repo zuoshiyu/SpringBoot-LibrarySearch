@@ -31,9 +31,16 @@ public class QRCodeCreator
     MatrixToImageWriter.writeToPath(bitMatrix, "PNG", new File(filePath).toPath());
 }
 
+  /**
+   * Given an object, this method will create a QRCode with defined path
+   * the data inside the QRCode is object.toString()
+   * @param object
+   * @param path example: qrcode/ISBN.png
+   * @throws WriterException
+   * @throws IOException
+   */
   public static void createQRCodeForObject(Object object, String path) throws WriterException, IOException
   {
-    // data that we want to store in the QR code
     String data = "Default String";
     if (object != null)
     {
@@ -45,9 +52,6 @@ public class QRCodeCreator
     JSONObject jsonObject = new JSONObject(map);
     String json = jsonObject.toString();
 
-    // invoking the user-defined method that creates the QR code
     generateQRCodeImage(json, 200, 200, path);
-    // prints if the QR code is generated
-    System.out.println("QR Code created successfully.");
   }
 }
