@@ -4,22 +4,50 @@
 <head>
 <meta charset="UTF-8">
 <title>Show PhysicalBooks</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link
-	rel="stylesheet"
-	type="text/css"
-	href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css" />
-<link
-	rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	data-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	data-crossorigin="anonymous">
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
+  <div class="container" id="navigator">
+    <ul class="nav nav-pills nav-stacked">
+  
+    <li class="active"><a href="">Home</a></li>
+    
+    <li class="dropdown"><a class="dropdown-toggle"
+      data-toggle="dropdown" href="#"> Searches <span class="caret"></span>
+    </a>
+      <ul class="dropdown-menu">
+        <li><a href="/simplesearch">Simple Search</a></li>
+        <li><a href="/advancedsearch">Advanced Search</a></li>
+        <li><a href="/textsearch">Text Search</a></li>
+        <li><a href="/hotwordsearch">Hotword Search</a></li>
+        <li><a href="/oversearch">Over Search</a></li>
+      </ul></li>
+    
+    <li class="dropdown"><a class="dropdown-toggle"
+      data-toggle="dropdown" href="#"> Admin view <span class="caret"></span>
+    </a>
+      <ul class="dropdown-menu">
+        <li><a href="/showPhysicalBooks">View Physical Books</a></li>
+        <li><a href="/showDigitalBooks">View Digital Books</a></li>
+        <li><a href="/showUsers">View Users</a></li>
+      </ul></li>
+      
+    <li><a href="/logout">Log out</a></li>
+     
+  </ul>
+  </div>
 	<div class="container mt-4">
 		<a th:href="@{/addPhysicalBookForm}" class="btn btn-info mb-2">Add a physicalBook</a>
 		<table
 			class="table table-borded table-striped"
-			id="physicalBook-table">
+			id="table">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -46,10 +74,13 @@
 		</table>
 		
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-		type="text/javascript"
-		src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script
+    type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
 </body>
 </html>

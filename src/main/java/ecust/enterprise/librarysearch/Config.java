@@ -63,7 +63,7 @@ public class Config implements WebMvcConfigurer
     http.authorizeHttpRequests()
     .requestMatchers("/show*", "/add*", "/update*").hasRole("ADMIN") 
     .requestMatchers("/*search", "/book-info*", "/qrcode/*").hasRole("USER")
-    .requestMatchers("/", "/static/**").permitAll()
+    .requestMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
     .and().formLogin();
     return http.build();
   }
