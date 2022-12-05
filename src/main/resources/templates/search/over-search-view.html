@@ -3,9 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-  rel="stylesheet"
-  type="text/css"
+<link rel="stylesheet" type="text/css"
   href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,62 +12,69 @@
 <title>SEARCH</title>
 </head>
 <body>
-<div class="container" id="navigator">
+  <div class="container" id="navigator">
     <ul class="nav nav-pills nav-stacked">
-  
-    <li class="active"><a href="">Home</a></li>
-    
-    <li class="dropdown"><a class="dropdown-toggle"
-      data-toggle="dropdown" href="#"> Searches <span class="caret"></span>
-    </a>
-      <ul class="dropdown-menu">
-        <li><a href="/simplesearch">Simple Search</a></li>
-        <li><a href="/advancedsearch">Advanced Search</a></li>
-        <li><a href="/textsearch">Text Search</a></li>
-        <li><a href="/hotwordsearch">Hotword Search</a></li>
-        <li><a href="/oversearch">Over Search</a></li>
-      </ul></li>
-    
-    <li class="dropdown"><a class="dropdown-toggle"
-      data-toggle="dropdown" href="#"> Admin view <span class="caret"></span>
-    </a>
-      <ul class="dropdown-menu">
-        <li><a href="/showPhysicalBooks">View Physical Books</a></li>
-        <li><a href="/showDigitalBooks">View Digital Books</a></li>
-        <li><a href="/showUsers">View Users</a></li>
-      </ul></li>
-      
-    <li><a href="/logout">Log out</a></li>
-     
-  </ul>
+
+      <li class="active"><a href="/simplesearch">Home</a></li>
+
+      <li class="dropdown"><a class="dropdown-toggle"
+          data-toggle="dropdown" href="#">
+          Searches <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/simplesearch">Simple Search</a></li>
+          <li><a href="/advancedsearch">Advanced Search</a></li>
+          <li><a href="/textsearch">Text Search</a></li>
+          <li><a href="/hotwordsearch">Hotword Search</a></li>
+          <li><a href="/oversearch">Over Search</a></li>
+        </ul></li>
+
+      <li class="dropdown"><a class="dropdown-toggle"
+          data-toggle="dropdown" href="#">
+          Admin view <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/showPhysicalBooks">View Physical Books</a>
+          </li>
+          <li><a href="/showDigitalBooks">View Digital Books</a></li>
+          <li><a href="/showUsers">View Users</a></li>
+        </ul></li>
+
+      <li class="dropdown"><a class="dropdown-toggle"
+          data-toggle="dropdown" href="#">
+          Admin add <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/addPhysicalBookForm">Add Physical Book</a></li>
+          <li><a href="/addDigitalBookForm">Add Digital Book</a></li>
+          <li><a href="/addUserForm">Add User</a></li>
+        </ul></li>
+
+      <li><a href="/logout">Log out</a></li>
+
+    </ul>
   </div>
+
   <div class="container mt-5">
     <h2 align="center">Over Search</h2>
     <form th:action="@{/oversearch}" method="post">
-      <input type="text" name="keyword" th:value="${keyword}" list="hotwords"
-        placeholder="Find by Key Word" size="50">
+      <input type="text" name="keyword" th:value="${keyword}"
+        list="hotwords" placeholder="Find by Key Word" size="50">
       <datalist id="hotwords">
-        <option th:each="hotword: ${hotwords}" th:value="${hotword.name}"
+        <option th:each="hotword: ${hotwords}"
+          th:value="${hotword.name}"
           th:text="${hotword.name} + ' Searched Times' +${hotword.useCount}">
       </datalist>
-      <label>Fields:
-        <input type="checkbox"
-            th:each="filter : ${filterListWrapper.getList}"
-            th:name="filterListWrapper"
-              th:text="${filter}"
-              th:value="${filter}"
-            th:field="*{filterListWrapper.list}"
-        /><!-- th:value="${filter}" value means default value in the field!!! -->
+      <label><input type="checkbox" id="checkbox"
+          th:each="filter : ${filterListWrapper.getList}"
+          th:name="filterListWrapper" th:text="${filter}"
+          th:value="${filter}" th:field="*{filterListWrapper.list}" />
       </label>
-      <select class="form-control" id="textFilter" name="textFilter"> 
-        <option th:each="textFilter: ${textFilters}" th:value="${textFilter}"
-          th:text="${textFilter}">
+      <select class="form-control" id="textFilter" name="textFilter">
+        <option th:each="textFilter: ${textFilters}"
+          th:value="${textFilter}" th:text="${textFilter}">
       </select>
-      <!-- <select class="form-control" id="hotword" name="keyword"> 
-        <option th:each="hotword: ${hotwords}" th:value="${hotword.name}"
-          th:text="${hotword.name} + ' Searched Times' +${hotword.useCount}">
-      </select> -->
-      
+
       <input type="date" name="date" value="1900-02-02">
       <button type="submit" class="btn btn-info">Search</button>
       <button type="reset" class="btn btn-info">Reset</button>
@@ -90,19 +95,17 @@
           <td th:text="${book.isbn}"></td>
           <td th:text="${book.author}"></td>
           <td th:text="${book.publisher}"></td>
-          <td>
-            <a th:href="@{/book-info(bookId=${book.isbn})}" class="btn btn-info">Check</a>
-          </td>
+          <td><a th:href="@{/book-info(bookId=${book.isbn})}"
+              class="btn btn-info">Check</a></td>
         </tr>
       </tbody>
     </table>
   </div>
-    <script
+  <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script
     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script
-    type="text/javascript"
+  <script type="text/javascript"
     src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
   <script type="text/javascript" src="js/common.js"></script>
 </body>

@@ -28,6 +28,12 @@ public class SearchController
   @Autowired
   private HotWordService hotWordService;
 
+  @GetMapping("/")
+  public String redirect()
+  {
+    return "redirect:/simplesearch";
+  }
+  
   @GetMapping("/simplesearch")
   public ModelAndView simpleSearch(String keyword, Filter filter)  {
     ModelAndView mav = new ModelAndView("search/simple-search-view");

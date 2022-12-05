@@ -63,7 +63,7 @@ public class PhysicalBookController {
 	@PostMapping("/updatePhysicalBook")
 	public String updatePhysicalBook(
 			@ModelAttribute("physicalBook") PhysicalBook physicalBook) {
-		physicalBookService.add(physicalBook);
+		physicalBookService.update(physicalBook);
 		return "redirect:/showPhysicalBooks";
 	}
 	

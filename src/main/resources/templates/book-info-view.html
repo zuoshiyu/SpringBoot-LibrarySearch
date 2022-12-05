@@ -15,33 +15,33 @@
 <body>
   <div class="container mt-5">
     <h2 align="center">Book Info</h2>
-    <h2>Index</h2>
+    <h5>Index</h5>
     <label th:text="${book.index}">Index</label>
-    <h2>Title</h2>
+    <h5>Title</h5>
     <label th:text="${book.title}">Title</label>
-    <h2>Author</h2>
+    <h5>Author</h5>
     <label th:text="${book.author}">Author</label>
-    <h2>Publisher</h2>
+    <h5>Publisher</h5>
     <label th:text="${book.publisher}">Publisher</label>
-    <h2>Publish Location</h2>
+    <h5>Publish Location</h5>
     <label th:text="${book.publocation}">Publish Location</label>
-    <h2>Publish Date</h2>
+    <h5>Publish Date</h5>
     <label th:text="${book.pubdate}">Publish Date</label>
-    <h2>ISBN</h2>
+    <h5>ISBN</h5>
     <label th:text="${book.isbn}">ISBN</label>
-    <h2>Price</h2>
+    <h5>Price</h5>
     <label th:text="${book.price}">Price</label>
-    <h2>Copy Number</h2>
+    <h5>Copy Number</h5>
     <label th:text="${book.copynum}">Copy Number</label>
-    <h2>Type</h2>
+    <h5>Type</h5>
     <label th:text="${book.type}">Type</label>
-    <h2>Language</h2>
+    <h5>Language</h5>
     <label th:text="${book.language}">Language</label>
-    <h2>Sub Title</h2>
+    <h5>Sub Title</h5>
     <label th:text="${book.subtitle}">Sub Title</label>
-    <h2>QR Code</h2>
+    <h5>QR Code</h5>
     <img alt="QRCode" class="img-responsive" th:src="${book.getQRCodePath()}"/>
-    <h2>Digital Book</h2>
+    <h5>Digital Book</h5>
     <a th:text="${digitalLink}" th:href="${digitalLink}" href="/simplesearch"> </a>
   </div>
   <script
