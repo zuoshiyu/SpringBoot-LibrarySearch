@@ -10,93 +10,24 @@
 <link rel="stylesheet" href="/css/common.css">
 <title>Simple Search</title>
 </head>
-<body>
+<body onload="loadNavigator();">
 
-  <div class="container" id="navigator">
-    <ul class="nav nav-pills nav-stacked">
-
-      <li class="active">
-        <a href="/simplesearch">Home</a>
-      </li>
-
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Searches <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="/simplesearch">Simple Search</a>
-          </li>
-          <li>
-            <a href="/advancedsearch">Advanced Search</a>
-          </li>
-          <li>
-            <a href="/textsearch">Text Search</a>
-          </li>
-          <li>
-            <a href="/hotwordsearch">Hotword Search</a>
-          </li>
-          <li>
-            <a href="/oversearch">Over Search</a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Admin view <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="/showPhysicalBooks">View Physical Books</a>
-          </li>
-          <li>
-            <a href="/showDigitalBooks">View Digital Books</a>
-          </li>
-          <li>
-            <a href="/showUsers">View Users</a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Admin add <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="/addPhysicalBookForm">Add Physical Book</a>
-          </li>
-          <li>
-            <a href="/addDigitalBookForm">Add Digital Book</a>
-          </li>
-          <li>
-            <a href="/addUserForm">Add User</a>
-          </li>
-        </ul>
-      </li>
-      
-      <li>
-        <a href="/logout">Log out</a>
-      </li>
-
-    </ul>
-  </div>
+  <div class="container" id="navigator"></div>
 
   <div class="container mt-5" id="main">
 
     <h2 align="center">Simple Search</h2>
     <!-- Search form -->
     <form th:action="@{/simplesearch}" method="get">
-    
+
       <input type="text" name="keyword" th:value="${keyword}"
         placeholder="Find by Key Word">
-        
+
       <select class="form-control" id="filter" name="filter">
         <option th:each="filter: ${filters}" th:value="${filter}"
           th:text="${filter}">
       </select>
-      
+
       <button type="submit" class="btn btn-info">Search</button>
       <button type="reset" class="btn btn-info">Reset</button>
     </form>
@@ -111,7 +42,7 @@
           <th>Action</th>
         </tr>
       </thead>
-      
+
       <tbody>
         <tr th:each="book : ${physicalBooks}" th:field="${l}">
           <td th:text="${book.title}"></td>
@@ -122,7 +53,7 @@
               class="btn btn-info">Check</a></td>
         </tr>
       </tbody>
-      
+
     </table>
 
   </div>

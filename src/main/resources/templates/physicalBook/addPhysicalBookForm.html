@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <title>Add PhysicalBook</title>
 <link rel="stylesheet" type="text/css"
-  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css" />
+  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-  data-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-  data-crossorigin="anonymous">
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css">
 </head>
-<body>
+<body onload="loadNavigator()">
+  <div id="navigator"></div>
   <div class="container mt-4">
     <form th:action="@{/addPhysicalBook}" th:object="${newPhysicalBook}"
       method="post">
@@ -18,47 +18,47 @@
       <input type="text" th:field="*{bookdex}"
         placeholder="Enter physicalBook index "
         class="form-control col-4 mb-4" />
-      
+
       <input type="text" th:field="*{isbn}"
         placeholder="Enter physicalBook ISBN"
         class="form-control col-4 mb-4" />
-      
+
       <input type="text" th:field="*{title}"
         placeholder="Enter physicalBook title "
         class="form-control col-4 mb-4" />
-        
+
       <input type="text" th:field="*{author}"
         placeholder="Enter physicalBook title "
         class="form-control col-4 mb-4" />
-        
+
       <input type="text" th:field="*{publisher}"
         placeholder="Enter physicalBook publisher "
         class="form-control col-4 mb-4" />
-        
+
       <input type="text" th:field="*{publocation}"
         placeholder="Enter physicalBook publish location "
         class="form-control col-4 mb-4" />
-        
+
       <input type="number" th:field="*{pubdate}"
         placeholder="Enter physicalBook publish year "
         class="form-control col-4 mb-4" />
-        
+
       <input type="number" th:field="*{price}"
         placeholder="Enter physicalBook price "
         class="form-control col-4 mb-4" />
-        
+
       <input type="number" th:field="*{copynum}"
         placeholder="Enter physicalBook publish copy number "
         class="form-control col-4 mb-4" />
-      
+
       <input type="text" th:field="*{type}"
         placeholder="Enter physicalBook type "
         class="form-control col-4 mb-4" />
-      
+
       <input type="text" th:field="*{language}"
         placeholder="Enter physicalBook language"
         class="form-control col-4 mb-4" />
-      
+
       <input type="text" th:field="*{subtitle}"
         placeholder="Enter physicalBook subtitle"
         class="form-control col-4 mb-4" />
@@ -67,9 +67,12 @@
 
     </form>
   </div>
+ <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript"
     src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
 </body>
 </html>
