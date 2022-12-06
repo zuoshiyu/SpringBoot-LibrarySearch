@@ -87,10 +87,10 @@ public class SearchService
           temp = physicalBookRepository.findByFieldAccurate(keyword, filter.toString());
           break;
         case "BEGIN":
-          temp = physicalBookRepository.findByKeywordBegin(keyword);
+          temp = physicalBookRepository.findByFieldBegin(keyword, filter.toString());
           break;
         case "INCLUDE":
-          temp = physicalBookRepository.findByKeywordInclude(keyword);
+          temp = physicalBookRepository.findByFieldInclude(keyword, filter.toString());
           break;
         default:
           break;
@@ -101,7 +101,7 @@ public class SearchService
       }
     }
     
-    retList = filterAfterDate(retList, year);
+    retList = filerByYear(retList, year);
     return retList;
   }
   
@@ -111,12 +111,18 @@ public class SearchService
     return bookOptional.isEmpty() ? null : bookOptional.get();  // Optional throws exception so you need this
   }
   
-  public List<PhysicalBook> filterAfterDate(List<PhysicalBook> list, int year)
+  /**Helper method filtering books by publish year<p>
+   * Only those published after the certain year are returned
+   * @param physicalBooks
+   * @param year
+   * @return list of filtered books
+   */
+  private List<PhysicalBook> filerByYear(List<PhysicalBook> physicalBooks, int year)
   {
     List<PhysicalBook> retList = new ArrayList<PhysicalBook>();
-    if (!list.isEmpty())
+    if (!physicalBooks.isEmpty())
     {
-      for (PhysicalBook physicalBook : list)
+      for (PhysicalBook physicalBook : physicalBooks)
       {
         if (physicalBook.getPubdate() > year)
         {

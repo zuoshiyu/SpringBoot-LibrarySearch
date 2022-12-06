@@ -16,11 +16,13 @@
   <div class="container mt-5">
     <h2 align="center">Hotword Search</h2>
     <form th:action="@{/hotwordsearch}" method="get">
-      <select class="form-control" id="hotword" name="keyword">
+      <input type="text" name="keyword" th:value="${keyword}"
+        list="hotwords" placeholder="Find by Key Word" size="50">
+      <datalist id="hotwords">
         <option th:each="hotword: ${hotwords}"
           th:value="${hotword.name}"
-          th:text="${hotword.name} + '  Searched Times:  ' +${hotword.useCount}">
-      </select>
+          th:text="${hotword.name} + ' Used: ' +${hotword.useCount} + ' times'">
+      </datalist>
       <button type="submit" class="btn btn-info">Search</button>
       <button type="reset" class="btn btn-info">Reset</button>
     </form>

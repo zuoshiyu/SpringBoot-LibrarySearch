@@ -32,8 +32,8 @@ public class QRCodeCreator
 }
 
   /**
-   * Given an object, this method will create a QRCode with defined path
-   * the data inside the QRCode is object.toString()
+   * Given an object, this method will create a QRCode with defined path 
+   * <p> The QRCode contains info:{@code object.toString()}
    * @param object
    * @param path example: qrcode/ISBN.png
    * @throws WriterException
