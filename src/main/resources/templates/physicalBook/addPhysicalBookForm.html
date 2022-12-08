@@ -14,60 +14,72 @@
   <div class="container mt-4">
     <form th:action="@{/addPhysicalBook}" th:object="${newPhysicalBook}"
       method="post">
+      <div id="div-left">
+        <h3>Please input book index</h3>
+        <input type="text" th:field="*{bookdex}"
+          placeholder="Enter physicalBook index "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{bookdex}"
-        placeholder="Enter physicalBook index "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book ISBN</h3>
+        <input type="text" th:field="*{isbn}"
+          placeholder="Enter physicalBook ISBN"
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{isbn}"
-        placeholder="Enter physicalBook ISBN"
-        class="form-control col-4 mb-4" />
+        <h3>Please input book title</h3>
+        <input type="text" th:field="*{title}"
+          placeholder="Enter physicalBook title "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{title}"
-        placeholder="Enter physicalBook title "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book author</h3>
+        <input type="text" th:field="*{author}"
+          placeholder="Enter physicalBook author "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{author}"
-        placeholder="Enter physicalBook title "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book publisher</h3>
+        <input type="text" th:field="*{publisher}"
+          placeholder="Enter physicalBook publisher "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{publisher}"
-        placeholder="Enter physicalBook publisher "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book publish location</h3>
+        <input type="text" th:field="*{publocation}"
+          placeholder="Enter physicalBook publish location "
+          class="form-control col-4 mb-4" />
+      </div>
+      <div id="div-right">
+        <h3>Please input book publish year</h3>
+        <input type="number" th:field="*{pubdate}"
+          placeholder="Enter digitalBook publish year "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{publocation}"
-        placeholder="Enter physicalBook publish location "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book price</h3>
+        <input type="number" th:field="*{price}"
+          placeholder="Enter physicalBook price "
+          class="form-control col-4 mb-4" />
 
-      <input type="number" th:field="*{pubdate}"
-        placeholder="Enter physicalBook publish year "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book copy number</h3>
+        <input type="number" th:field="*{copynum}"
+          placeholder="Enter physicalBook publish copy number "
+          class="form-control col-4 mb-4" />
 
-      <input type="number" th:field="*{price}"
-        placeholder="Enter physicalBook price "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book type</h3>
+        <input type="text" th:field="*{type}" placeholder="中文图书，英文图书"
+          class="form-control col-4 mb-4" />
 
-      <input type="number" th:field="*{copynum}"
-        placeholder="Enter physicalBook publish copy number "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book language</h3>
+        <input type="text" th:field="*{language}"
+          placeholder="chi,en,jp" class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{type}"
-        placeholder="Enter physicalBook type "
-        class="form-control col-4 mb-4" />
-
-      <input type="text" th:field="*{language}"
-        placeholder="Enter physicalBook language"
-        class="form-control col-4 mb-4" />
-
-      <input type="text" th:field="*{subtitle}"
-        placeholder="Enter physicalBook subtitle"
-        class="form-control col-4 mb-4" />
+        <h3>Please input book sub title</h3>
+        <input type="text" th:field="*{subtitle}"
+          placeholder="Enter physicalBook subtitle"
+          class="form-control col-4 mb-4" />
+      </div>
 
       <button class="btn btn-primary" type="submit">Save</button>
 
     </form>
   </div>
- <script
+  <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script
     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

@@ -12,22 +12,31 @@
 <body onload="loadNavigator()">
   <div id="navigator"></div>
   <div class="container mt-4">
-    <form th:action="@{/addUser}" th:object="${newUser}" method="post">
-
-      <input type="text" th:field="*{username}"
-        placeholder="${user.getUsername()}"
-        class="form-control col-4 mb-4" />
-
-      <input type="password" th:field="*{password}"
-        th:value="${password}" placeholder="Input password:"
-        class="form-control col-4 mb-4">
-
-      <input type="hidden" th:field="*{id}" placeholder=""
-        class="form-control col-4 mb-4" />
-
-      <button class="btn btn-primary" type="submit">Save</button>
-
-    </form>
+    <div id="div-left">
+      <form th:action="@{/addUser}" th:object="${newUser}" method="post">
+        
+        <h3>Please input user name:</h3>
+        <input type="text" th:field="*{username}"
+          placeholder="User name"
+          class="form-control col-4 mb-4" />
+        
+        <h3>Please input password:</h3>
+        <input type="text" th:field="*{password}"
+          th:value="${password}" placeholder="password"
+          class="form-control col-4 mb-4">
+        
+        <h3>Please input user roles:</h3>
+        <input type="text" th:field="*{roles}"
+          th:value="${password}" placeholder="ROLE_USER,ROLE_ADMIN"
+          class="form-control col-4 mb-4">
+  
+        <input type="hidden" th:field="*{id}" placeholder=""
+          class="form-control col-4 mb-4" />
+  
+        <button class="btn btn-primary" type="submit">Save</button>
+  
+      </form>
+    </div>
   </div>
   <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

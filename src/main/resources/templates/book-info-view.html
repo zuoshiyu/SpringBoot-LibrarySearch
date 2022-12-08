@@ -2,55 +2,76 @@
 <html xmlns:th="www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-  crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
 <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/common.css"> 
-<title>SEARCH</title>
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css">
+<title>Book info</title>
+<style>
+p {
+  font-size: large;
+  color: #7c1919;
+}
+
+label {
+  color: #ff5026;
+}
+</style>
 </head>
 <body onload="loadNavigator()">
-  <div class="container mt-5">
-    <h2 align="center">Book Info</h2>
-    <h5>Index</h5>
-    <label th:text="${book.bookdex}">Index</label>
-    <h5>Title</h5>
-    <label th:text="${book.title}">Title</label>
-    <h5>Author</h5>
-    <label th:text="${book.author}">Author</label>
-    <h5>Publisher</h5>
-    <label th:text="${book.publisher}">Publisher</label>
-    <h5>Publish Location</h5>
-    <label th:text="${book.publocation}">Publish Location</label>
-    <h5>Publish Date</h5>
-    <label th:text="${book.pubdate}">Publish Date</label>
-    <h5>ISBN</h5>
-    <label th:text="${book.isbn}">ISBN</label>
-    <h5>Price</h5>
-    <label th:text="${book.price}">Price</label>
-    <h5>Copy Number</h5>
-    <label th:text="${book.copynum}">Copy Number</label>
-    <h5>Type</h5>
-    <label th:text="${book.type}">Type</label>
-    <h5>Language</h5>
-    <label th:text="${book.language}">Language</label>
-    <h5>Sub Title</h5>
-    <label th:text="${book.subtitle}">Sub Title</label>
-    <h5>QR Code</h5>
-    <img alt="QRCode" class="img-responsive" th:src="${book.getQRCodePath()}"/>
-    <h5>Digital Book</h5>
-    <a th:text="${digitalLink}" th:href="${digitalLink}" href="/simplesearch"> </a>
+    <div id="navigator"></div>
+    <div class="container mt-5">
+    <div id="div-left">
+      <p>Index&nbsp; <label th:text="${book.bookdex}">Index</label>
+      </p>
+      <p>Title&nbsp; <label th:text="${book.title}">Title</label>
+      </p>
+      <p>Author&nbsp; <label th:text="${book.author}">Author</label>
+      </p>
+      <p>Publisher&nbsp; <label th:text="${book.publisher}">Publisher</label>
+      </p>
+      <p>Publish Location&nbsp; <label th:text="${book.publocation}">Publish
+          Location</label>
+      </p>
+      <p>Publish Date&nbsp; <label th:text="${book.pubdate}">Publish
+          Date</label>
+      </p>
+      <p>ISBN&nbsp; <label th:text="${book.isbn}">ISBN</label>
+      </p>
+      <p>Price&nbsp; <label th:text="${book.price}">Price</label>
+      </p>
+    </div>
+    <div id="div-right">
+      <p>Copy Number&nbsp; <label th:text="${book.copynum}">Copy
+          Number</label>
+      </p>
+      <p>Type&nbsp; <label th:text="${book.type}">Type</label>
+      </p>
+      <p>Language&nbsp; <label th:text="${book.language}">Language</label>
+      </p>
+      <p>Sub Title&nbsp; <label th:text="${book.subtitle}">Sub
+          Title</label>
+      </p>
+      <p>QR Code&nbsp; <img alt="QRCode" class="img-responsive"
+        th:src="${book.getQRCodePath()}" />
+      </p>
+      <p>Digital Book&nbsp; <a th:text="${digitalLink}"
+          th:href="${digitalLink}" href="/simplesearch"> </a>
+      </p>
+    </div>
   </div>
+
+   <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-    integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
-    crossorigin="anonymous"></script>
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  
+  <script type="text/javascript">
+  	
+  </script>
 </body>
 </html>

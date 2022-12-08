@@ -14,40 +14,48 @@
   <div class="container mt-4">
     <form th:action="@{/addDigitalBook}" th:object="${newDigitalBook}"
       method="post">
+      <div id="div-left">
+        <h3>Please input book ISBN</h3>
+        <input type="text" th:field="*{isbn}"
+          placeholder="Enter digitalBook ISBN"
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{isbn}"
-        placeholder="Enter digitalBook ISBN"
-        class="form-control col-4 mb-4" />
+        <h3>Please input book title</h3>
+        <input type="text" th:field="*{title}"
+          placeholder="Enter digitalBook title "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{title}"
-        placeholder="Enter digitalBook title "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book author</h3>
+        <input type="text" th:field="*{author}"
+          placeholder="Enter digitalBook author "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{author}"
-        placeholder="Enter digitalBook title "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book publisher</h3>
+        <input type="text" th:field="*{publisher}"
+          placeholder="Enter digitalBook publisher "
+          class="form-control col-4 mb-4" />
+      </div>
+      <div id="div-right">
+        <h3>Please input book publish year</h3>
+        <input type="number" th:field="*{pubdate}"
+          placeholder="Enter digitalBook publish year "
+          class="form-control col-4 mb-4" />
 
-      <input type="text" th:field="*{publisher}"
-        placeholder="Enter digitalBook publisher "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book book url</h3>
+        <input type="text" th:field="*{bookurl}"
+          placeholder="Enter digitalBook book url "
+          class="form-control col-4 mb-4" />
 
-      <input type="number" th:field="*{pubdate}"
-        placeholder="Enter digitalBook publish year "
-        class="form-control col-4 mb-4" />
-
-      <input type="text" th:field="*{bookurl}"
-        placeholder="Enter digitalBook book url "
-        class="form-control col-4 mb-4" />
-
-      <input type="text" th:field="*{source}"
-        placeholder="Enter digitalBook source "
-        class="form-control col-4 mb-4" />
+        <h3>Please input book source</h3>
+        <input type="text" th:field="*{source}"
+          placeholder="中华数字书苑(Apabi)" class="form-control col-4 mb-4" />
+      </div>
 
       <button class="btn btn-primary" type="submit">Save</button>
 
     </form>
   </div>
- <script
+  <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script
     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

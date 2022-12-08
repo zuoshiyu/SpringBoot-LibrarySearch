@@ -13,14 +13,17 @@
   <div id="navigator"></div>
   <div class="container mt-4">
     <form th:action="@{/updateUser}" th:object="${user}" method="post">
-
-      <input type="text" th:field="*{username}"
-        placeholder="${user.getUsername()}"
-        class="form-control col-4 mb-4" />
-
-      <input type="text" th:field="*{password}"
-        placeholder="Edit password:" class="form-control col-4 mb-4">
-
+      
+      <h3>Please input user name:</h3>
+      <input type="text" th:field="*{username}" class="form-control col-4 mb-4" />
+      
+      <h3>Please input password:</h3>
+      <input type="text" th:field="*{password}" class="form-control col-4 mb-4">
+      
+      <h3>Please input user roles:</h3>
+      <input type="text" th:field="*{roles}" 
+        class="form-control col-4 mb-4">
+      
       <input type="hidden" th:field="*{id}" placeholder=""
         class="form-control col-4 mb-4" />
 

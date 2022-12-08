@@ -20,6 +20,7 @@ input {
 #filter, #textFilter {
   width: 30%;
   height: 34px;
+  display: inline;
 }
 
 #checkbox {
@@ -30,6 +31,12 @@ input {
 label {
   width: 54%;
   height: 34px;
+}
+
+#div-left, #div-right {
+  padding: 10px;
+  display: inline-block;
+  width: 40%;
 }
 
 /* Copy pasted */
