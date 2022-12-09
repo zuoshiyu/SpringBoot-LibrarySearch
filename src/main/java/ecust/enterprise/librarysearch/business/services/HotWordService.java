@@ -38,7 +38,7 @@ public class HotWordService
     
     if (temp.isPresent())
     {
-      temp.get().update();
+      hotwordRepository.save(new Hotword(keyword, temp.get().getUseCount() + 1, new Date(System.currentTimeMillis())));
     }
     else 
     {

@@ -28,8 +28,6 @@ public class InfoController
   private SearchService physicalBookService;
   @Autowired
   private DigitalBookService digitalBookService;
-  @Autowired
-  private HotWordService hotWordService;
   
   @GetMapping("/book-info")
   public ModelAndView showBookInfo(String bookId)

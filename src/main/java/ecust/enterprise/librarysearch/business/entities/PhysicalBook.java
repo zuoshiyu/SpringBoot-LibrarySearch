@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PhysicalBook
 {
-  private String index;
+  private String bookdex;
   private String title;
   private String author;
   private String publisher;

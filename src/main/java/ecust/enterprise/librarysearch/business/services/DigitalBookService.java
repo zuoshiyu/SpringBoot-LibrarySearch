@@ -29,9 +29,7 @@ public class DigitalBookService
   {
     Optional<DigitalBook> digitalBookOptional = digitalBookRepository
         .findById(id);
-    digitalBookOptional.orElseThrow(
-        () -> new IllegalStateException("DigitalBook doesn't exist!"));
-    return digitalBookOptional.get();
+    return digitalBookOptional.isPresent() ? digitalBookOptional.get() : null;
   }
 
   public void add(DigitalBook digitalBook)

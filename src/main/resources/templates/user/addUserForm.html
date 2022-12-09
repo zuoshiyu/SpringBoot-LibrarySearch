@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Add User</title>
-<link
-	rel="stylesheet"
-	type="text/css"
-	href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css" />
-<link
-	rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	data-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	data-crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css">
 </head>
-<body>
-	<div class="container mt-4">
-		<form th:action="@{/addUser}" 
-			th:object="${newUser}" 
-			method="post">
-		
-			<input type="text" th:field="*{username}" 
-				placeholder="Enter user username " 
-				class="form-control col-4 mb-4" />
-			
-			<input type="hidden" th:field="*{id}" 
-				placeholder="" 
-				class="form-control col-4 mb-4" />
-			
-			<button 
-				class="btn btn-primary" 
-				type="submit">Save</button>
-			
-		</form>	
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-		type="text/javascript"
-		src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+<body onload="loadNavigator()">
+  <div id="navigator"></div>
+  <div class="container mt-4">
+    <div id="div-left">
+      <form th:action="@{/addUser}" th:object="${newUser}" method="post">
+        
+        <h3>Please input user name:</h3>
+        <input type="text" th:field="*{username}"
+          placeholder="User name"
+          class="form-control col-4 mb-4" />
+        
+        <h3>Please input password:</h3>
+        <input type="text" th:field="*{password}"
+          th:value="${password}" placeholder="password"
+          class="form-control col-4 mb-4">
+        
+        <h3>Please input user roles:</h3>
+        <input type="text" th:field="*{roles}"
+          th:value="${password}" placeholder="ROLE_USER,ROLE_ADMIN"
+          class="form-control col-4 mb-4">
+  
+        <input type="hidden" th:field="*{id}" placeholder=""
+          class="form-control col-4 mb-4" />
+  
+        <button class="btn btn-primary" type="submit">Save</button>
+  
+      </form>
+    </div>
+  </div>
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
 </body>
 </html>
