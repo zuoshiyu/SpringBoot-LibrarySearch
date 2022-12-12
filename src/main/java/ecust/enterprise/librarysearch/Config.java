@@ -62,10 +62,12 @@ public class Config implements WebMvcConfigurer
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf().disable()
     .authorizeHttpRequests()
-    .requestMatchers("/show*", "/add*", "/update*", "/delete*").hasRole("ADMIN") 
-    .requestMatchers("/*search", "/book-info*", "/qrcode/*").hasRole("USER")
-    .requestMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
-    .and().formLogin();
+//    .requestMatchers("/show*", "/add*", "/update*", "/delete*").hasRole("ADMIN") 
+//    .requestMatchers("/*search", "/book-info*", "/qrcode/*").hasRole("USER")
+//    .requestMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
+    .requestMatchers("/", "/css/*", "/js/*", "/img/*", "/show*", 
+        "/add*", "/update*", "/delete*", "/*search", "/book-info*", "/qrcode/*").permitAll();
+//    .and().formLogin();
     return http.build();
   }
   

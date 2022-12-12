@@ -38,6 +38,9 @@ function loadNavigator() {
 	          <li>
 	            <a href="/oversearch">Over Search</a>
 	          </li>
+	          <li>
+	            <a href="/specifiedsearch">Specified Search</a>
+	          </li>
 	        </ul>
 	      </li>
 	

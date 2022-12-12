@@ -24,7 +24,7 @@ public class PhysicalBook
   private String author;
   private String publisher;
   private String publocation;
-  private int pubdate;
+  private String pubdate;
   private int pagenum;
   @Id
   private String isbn;
@@ -33,6 +33,7 @@ public class PhysicalBook
   private String type;
   private String language;
   private String subtitle;
+  private String library;
   
   @Transient
   public String getQRCodePath()

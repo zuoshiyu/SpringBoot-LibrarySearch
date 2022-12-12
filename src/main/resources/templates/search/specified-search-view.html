@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css"
+  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css">
+<title>Specified Search</title>
+</head>
+<body onload="loadNavigator()">
+  <div class="container" id="navigator"></div>
+  <div class="container mt-5">
+    <h2 align="center">Specified Search</h2>
+    <form th:action="@{/specifiedsearch}" method="post">
+      <fieldset>
+        <h1>中图分类法</h1>
+        <div class="radio-div">
+          <input type="radio" id="bookdexChoice1" name="bookdex"
+            class="radio" value="TP393" />
+          <label for="bookdexChoice1">TP393</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="bookdexChoice2" name="bookdex"
+            class="radio" value="TP273" />
+          <label for="bookdexChoice2">TP273</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="bookdexChoice3" name="bookdex"
+            class="radio" value="TP36" />
+          <label for="bookdexChoice3">TP36</label>
+        </div>
+      </fieldset>
+      
+
+      <fieldset>
+        <h1>作者</h1>
+        <div class="radio-div">
+          <input type="radio" id="authorChoice1" name="author"
+            class="radio" value="蒋亚东" />
+          <label for="authorChoice1">蒋亚东</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="authorChoice2" name="author"
+            class="radio" value="冯博琴" />
+          <label for="authorChoice2">冯博琴</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="authorChoice3" name="author"
+            class="radio" value="崔巍" />
+          <label for="authorChoice3">崔巍</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <h1>主题词</h1>
+        <div class="radio-div">
+          <input type="radio" id="titleChoice1" name="title"
+            class="radio" value="软件" />
+          <label for="titleChoice1">软件</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="titleChoice2" name="title"
+            class="radio" value="控制" />
+          <label for="titleChoice2">控制</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="titleChoice3" name="title"
+            class="radio" value="设计" />
+          <label for="titleChoice3">设计</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <h1>语言</h1>
+        <div class="radio-div">
+          <input type="radio" id="languageChoice1" name="language"
+            class="radio" value="chi" />
+          <label for="languageChoice1">chi</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="languageChoice2" name="language"
+            class="radio" value="en" />
+          <label for="languageChoice2">en</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="languageChoice3" name="language"
+            class="radio" value="jp" />
+          <label for="languageChoice3">jp</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <h1>种类</h1>
+        <div class="radio-div">
+          <input type="radio" id="typeChoice1" name="type" class="radio"
+            value="中文图书" />
+          <label for="typeChoice1">中文图书</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="typeChoice2" name="type" class="radio"
+            value="英文图书" />
+          <label for="typeChoice2">英文图书</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="typeChoice3" name="type" class="radio"
+            value="日文图书" />
+          <label for="typeChoice3">日文图书</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <h1>年代</h1>
+        <div class="radio-div">
+          <input type="radio" id="pubdateChoice1" name="pubdate"
+            class="radio" value="2008" />
+          <label for="pubdateChoice1">2008</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="pubdateChoice2" name="pubdate"
+            class="radio" value="1990" />
+          <label for="pubdateChoice2">1990</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="pubdateChoice3" name="pubdate"
+            class="radio" value="2010" />
+          <label for="pubdateChoice3">2010</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <h1>分馆</h1>
+        <div class="radio-div">
+          <input type="radio" id="libraryChoice1" name="library"
+            class="radio" value="奉贤" />
+          <label for="libraryChoice1">奉贤</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="libraryChoice2" name="library"
+            class="radio" value="徐汇" />
+          <label for="libraryChoice2">徐汇</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="libraryChoice3" name="library"
+            class="radio" value="校外" />
+          <label for="libraryChoice3">校外</label>
+        </div>
+      </fieldset>
+
+      <div>
+        <button type="submit" class="btn btn-info">Search</button>
+        <button type="reset" class="btn btn-info">Reset</button>
+      </div>
+    </form>
+
+    <table class="table table-bordered table-sm mt-2" id="table">
+      <thead>
+        <tr>
+          <th>Bookdex</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="book : ${physicalBooks}" th:field="${l}">
+          <td th:text="${book.bookdex}"></td>
+          <td th:text="${book.title}"></td>
+          <td th:text="${book.author}"></td>
+          <td th:text="${book.pubdate}"></td>
+          <td><a th:href="@{/book-info(bookId=${book.isbn})}"
+              class="btn btn-info">Check</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+</body>
+</html>

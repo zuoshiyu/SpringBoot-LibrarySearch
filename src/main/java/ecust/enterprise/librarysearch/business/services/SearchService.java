@@ -80,6 +80,31 @@ public class SearchService
     return getSortedByRule(retList, keyword);
   }
   
+  public List<PhysicalBook> getBySpecifiedSearch(Map<String, String> filterMap)
+  {
+    List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp = null;
+    
+    for (Map.Entry<String, String> entry : filterMap.entrySet())
+    {
+      // entry: <field, keyword> 
+      temp = physicalBookRepository.findByFieldInclude(entry.getValue(), entry.getKey());
+      
+      if (!temp.isEmpty())
+      {
+        if (retList.isEmpty())
+        {
+          retList.addAll(temp);
+        }
+        else 
+        {
+          retList.retainAll(temp);
+        }
+      }
+    }
+    
+    return retList;
+  }
+  
   public List<PhysicalBook> getByOverSearch(String keyword, List<Filter> filters, TextFilter textFilter, int year)
   {
     List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp = null;
@@ -127,7 +152,7 @@ public class SearchService
     {
       for (PhysicalBook physicalBook : physicalBooks)
       {
-        if (physicalBook.getPubdate() > year)
+        if (physicalBook.getPubdate().equals(String.valueOf(year)))
         {
           retList.add(physicalBook);
         }

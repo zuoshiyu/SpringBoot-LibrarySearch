@@ -3,6 +3,7 @@ package ecust.enterprise.librarysearch.web.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
@@ -157,6 +159,24 @@ public class SearchController
     mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
     mav.addObject("keyword", keyword);
     mav.addObject("hotwords", hotWordService.getWithinMonth());
+    
+    return mav;
+  }
+  
+  @GetMapping("/specifiedsearch")
+  public ModelAndView showSpecifiedSearch()
+  {
+    ModelAndView mav = new ModelAndView("search/specified-search-view");
+    
+    return mav;
+  }
+  
+  @PostMapping("/specifiedsearch")
+  public ModelAndView specifiedSearch(@RequestParam Map<String, String> filterMap)  // use @RequestParam to receive a map
+  {
+    ModelAndView mav = new ModelAndView("search/specified-search-view");
+    mav.addObject("physicalBooks",
+        searchService.getBySpecifiedSearch(filterMap));
     
     return mav;
   }
