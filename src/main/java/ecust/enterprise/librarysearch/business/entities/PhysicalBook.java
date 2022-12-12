@@ -39,4 +39,10 @@ public class PhysicalBook
   {
     return "qrcode/" + isbn + ".png";
   }
+  
+  @Transient
+  public String getInfo() 
+  {
+    return this.title + this.subtitle + this.author + this.publisher + this.publocation;
+  }
 }

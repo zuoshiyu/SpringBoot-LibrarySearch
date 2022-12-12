@@ -1,10 +1,15 @@
 package ecust.enterprise.librarysearch.business.services;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +33,12 @@ public class SearchService
   
   public List<PhysicalBook> getByKeyword(String keyword)
   {
-    return physicalBookRepository.findByKeywordInclude(keyword);
+    return getSortedByRule(physicalBookRepository.findByKeywordInclude(keyword), keyword);
   }
   
   public List<PhysicalBook> getBySimpleSearch(String keyword, Filter psBy)
   {
-    return physicalBookRepository.findByFieldInclude(keyword, psBy.toString());
+    return getSortedByRule(physicalBookRepository.findByFieldInclude(keyword, psBy.toString()), keyword);
   }
   
   public List<PhysicalBook> getByAdvancedSearch(String keyword, List<Filter> filters)
@@ -51,7 +56,7 @@ public class SearchService
     {
       retList = new ArrayList<>(new HashSet<>(retList));  // Remove duplicates
     }
-    return retList;
+    return getSortedByRule(retList, keyword);
   }
   
   public List<PhysicalBook> getByTextSearch(String keyword, TextFilter textFilter)
@@ -72,7 +77,7 @@ public class SearchService
       default:
         break;
     }
-    return retList;
+    return getSortedByRule(retList, keyword);
   }
   
   public List<PhysicalBook> getByOverSearch(String keyword, List<Filter> filters, TextFilter textFilter, int year)
@@ -100,9 +105,7 @@ public class SearchService
         retList.addAll(temp);
       }
     }
-    
-    retList = filerByYear(retList, year);
-    return retList;
+    return getSortedByRule(filerByYear(retList, year), keyword);
   }
   
   public PhysicalBook getByISBN(String isbn)
@@ -131,6 +134,31 @@ public class SearchService
       }
     }
     return retList;
+  }
+  
+  /**
+   * Get books sorted with a specified rule
+   * TODO Refactor so more rules can be specified
+   * @param physicalBooks
+   * @param keyword
+   * @return
+   */
+  private List<PhysicalBook> getSortedByRule(List<PhysicalBook> physicalBooks, String keyword)
+  {
+    Map<PhysicalBook, Integer> unsortedMap = new HashMap<PhysicalBook, Integer>();
+    // LinkedHashMap preserve the ordering of elements in which they are inserted
+    LinkedHashMap<PhysicalBook, Integer> sortedMap = new LinkedHashMap<PhysicalBook, Integer>();
+    for (PhysicalBook physicalBook : physicalBooks)
+    {
+      // Define your rule of relevance as generating value of the map here
+      unsortedMap.put(physicalBook,
+          physicalBook.getInfo().indexOf(keyword));
+    }
+    
+    unsortedMap.entrySet().stream().sorted(Map.Entry.comparingByValue())  // Add Comparator.reverseOrder() if reverse
+        .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+    
+    return new LinkedList<PhysicalBook>(sortedMap.keySet());
   }
   
 }

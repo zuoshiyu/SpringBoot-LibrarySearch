@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	// modify table behavior
 	$("table").DataTable({
-		order: [0, 'desc'],
+		'order': [[4, 'asc']],
 		'aoColumnDefs': [{
 			'bSortable': false,
 			'aTargets': [-1]
