@@ -21,6 +21,8 @@ public interface PhysicalBookRepository extends JpaRepository<PhysicalBook, Stri
       + " WHEN :field = 'bookdex' THEN bookdex\n"
       + " WHEN :field = 'pubdate' THEN pubdate\n"
       + " WHEN :field = 'library' THEN library\n"
+      + " WHEN :field = 'info' THEN info\n"
+      + " WHEN :field = 'authorInfo' THEN authorInfo\n"
       + " ELSE NULL\n"
       + " END\n";
   

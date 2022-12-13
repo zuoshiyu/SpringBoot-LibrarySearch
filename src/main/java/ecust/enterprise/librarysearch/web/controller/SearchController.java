@@ -60,7 +60,6 @@ public class SearchController
   public ModelAndView showAdvancedSearch()
   {
     ModelAndView mav = new ModelAndView("search/advanced-search-view");
-    mav.addObject("physicalBooks", searchService.getAll());
     
     return mav;
   }
@@ -80,7 +79,6 @@ public class SearchController
   public ModelAndView showTextSearch()
   {
     ModelAndView mav = new ModelAndView("search/text-search-view");
-    mav.addObject("physicalBooks", searchService.getAll());
     mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
 
     return mav;
@@ -108,7 +106,6 @@ public class SearchController
     
     if (keyword == null)
     {
-      mav.addObject("physicalBooks", searchService.getAll());
     } 
     else
     {

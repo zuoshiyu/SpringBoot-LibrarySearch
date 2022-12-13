@@ -23,6 +23,9 @@ label {
     <div id="navigator"></div>
     <div class="container mt-5">
     <div id="div-left">
+      <p>Cover&nbsp; <img alt="Cover" class="img-responsive"
+        th:src="${book.getCoverPath()}" />
+      </p>
       <p>Index&nbsp; <label th:text="${book.bookdex}">Index</label>
       </p>
       <p>Title&nbsp; <label th:text="${book.title}">Title</label>
@@ -40,6 +43,10 @@ label {
       <p>ISBN&nbsp; <label th:text="${book.isbn}">ISBN</label>
       </p>
       <p>Price&nbsp; <label th:text="${book.price}">Price</label>
+      </p>
+      <p>Info&nbsp; <label th:text="${book.info}">Price</label>
+      </p>
+      <p>Author Info&nbsp; <label th:text="${book.authorInfo}">Price</label>
       </p>
     </div>
     <div id="div-right">

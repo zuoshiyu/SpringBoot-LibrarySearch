@@ -178,7 +178,7 @@ public class SearchService
     {
       // Define your rule of relevance as generating value of the map here
       unsortedMap.put(physicalBook,
-          physicalBook.getInfo().indexOf(keyword));
+          physicalBook.getRelevanceString().indexOf(keyword));
     }
     
     unsortedMap.entrySet().stream().sorted(Map.Entry.comparingByValue())  // Add Comparator.reverseOrder() if reverse

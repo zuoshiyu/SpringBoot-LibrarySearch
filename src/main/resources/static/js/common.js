@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	// modify table behavior
 	$("table").DataTable({
+		lengthMenu: [
+            [3, 5, 10],
+            [3, 5, 10],
+        ],
 		'order': [[4, 'asc']],
 		'aoColumnDefs': [{
 			'bSortable': false,

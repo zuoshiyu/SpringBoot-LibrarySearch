@@ -43,7 +43,7 @@ public class InfoController
     
     try
     {
-      Path uploadPath = new File("qrcode").toPath();
+      Path uploadPath = new File("img/qrcode").toPath();
       if (!Files.exists(uploadPath))
       {
         Files.createDirectories(uploadPath);

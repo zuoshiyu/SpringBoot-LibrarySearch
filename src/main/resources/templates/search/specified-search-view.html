@@ -157,6 +157,7 @@
     <table class="table table-bordered table-sm mt-2" id="table">
       <thead>
         <tr>
+          <th>Cover</th>
           <th>Bookdex</th>
           <th>Title</th>
           <th>Author</th>
@@ -166,6 +167,7 @@
       </thead>
       <tbody>
         <tr th:each="book : ${physicalBooks}" th:field="${l}">
+          <td><img alt="Cover" class="img-responsive" th:src="${book.getCoverPath()}"></td>
           <td th:text="${book.bookdex}"></td>
           <td th:text="${book.title}"></td>
           <td th:text="${book.author}"></td>
