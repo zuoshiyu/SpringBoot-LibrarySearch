@@ -3,6 +3,7 @@ package ecust.enterprise.librarysearch.web.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
 import ecust.enterprise.librarysearch.business.services.HotWordService;
+import ecust.enterprise.librarysearch.business.services.LogService;
 import ecust.enterprise.librarysearch.business.services.SearchService;
 import ecust.enterprise.librarysearch.business.util.Filter;
 import ecust.enterprise.librarysearch.business.util.ListWrapper;
@@ -29,6 +31,8 @@ public class SearchController
   private SearchService searchService;
   @Autowired
   private HotWordService hotWordService;
+  @Autowired
+  private LogService logService;
 
   @GetMapping("/")
   public String redirect()
@@ -51,6 +55,7 @@ public class SearchController
           searchService.getBySimpleSearch(keyword, filter));
       mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
+      logService.log(keyword);
     }
     
     return mav;
@@ -71,6 +76,7 @@ public class SearchController
     mav.addObject("physicalBooks",
         searchService.getByFilterMap(filterMap, TextFilter.INCLUDE));
     filterMap.values().forEach(hotWordService::update);
+    logService.log(getNoEmptyValMap(filterMap).values());
     
     return mav;
   }
@@ -95,6 +101,7 @@ public class SearchController
     mav.addObject("physicalBooks", searchService.getByFilterMap(filterMap, textFilter));
     mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
     filterMap.values().forEach(hotWordService::update);
+    logService.log(getNoEmptyValMap(filterMap).values());
 
     return mav;
   }
@@ -112,6 +119,7 @@ public class SearchController
       mav.addObject("physicalBooks", searchService.getByKeyword(keyword));
       mav.addObject("keyword", keyword);
       hotWordService.update(keyword);
+      logService.log(keyword);
     }
     mav.addObject("hotwords", hotWordService.getWithinMonth());
     
@@ -151,6 +159,7 @@ public class SearchController
     mav.addObject("textFilters", EnumSet.allOf(TextFilter.class));
     mav.addObject("keyword", keyword);
     mav.addObject("hotwords", hotWordService.getWithinMonth());
+    logService.log(keyword);
     
     return mav;
   }
@@ -170,6 +179,7 @@ public class SearchController
     mav.addObject("physicalBooks",
         searchService.getByFilterMap(filterMap, TextFilter.INCLUDE));
     filterMap.values().forEach(hotWordService::update);
+    logService.log(filterMap.values());
     
     return mav;
   }
@@ -177,5 +187,21 @@ public class SearchController
   private int convertDateToYear(String date)
   {
     return Integer.valueOf(date.substring(0, 3));
+  }
+  
+  private Map<String, String> getNoEmptyValMap(Map<String, String> map)
+  {
+    Map<String, String> retMap = new LinkedHashMap<>();
+    for (Map.Entry<String, String> entry : map.entrySet())
+    {
+      String key = entry.getKey();
+      String val = entry.getValue();
+      
+      if (!val.isEmpty())
+      {
+        retMap.put(key, val);
+      }
+    }
+    return retMap;
   }
 }

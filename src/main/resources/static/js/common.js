@@ -5,7 +5,6 @@ $(document).ready(function() {
             [3, 5, 10],
             [3, 5, 10],
         ],
-		'order': [[4, 'asc']],
 		'aoColumnDefs': [{
 			'bSortable': false,
 			'aTargets': [-1]
@@ -44,6 +43,9 @@ function loadNavigator() {
 	          </li>
 	          <li>
 	            <a href="/specifiedsearch">Specified Search</a>
+	          </li>
+	          <li>
+	            <a href="/logs">Search Logs</a>
 	          </li>
 	        </ul>
 	      </li>

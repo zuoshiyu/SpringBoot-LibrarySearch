@@ -66,7 +66,7 @@ public class Config implements WebMvcConfigurer
 //    .requestMatchers("/*search", "/book-info*", "/qrcode/*").hasRole("USER")
 //    .requestMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
     .requestMatchers("/", "/css/*", "/js/*", "/img/*", "/show*", 
-        "/add*", "/update*", "/delete*", "/*search", "/book-info*", "/img/**").permitAll();
+        "/add*", "/update*", "/delete*", "/*search", "/book-info*", "/img/**", "/logs").permitAll();
 //    .and().formLogin();
     return http.build();
   }
