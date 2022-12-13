@@ -59,35 +59,36 @@ public class SearchService
     return getSortedByRule(retList, keyword);
   }
   
-  public List<PhysicalBook> getByTextSearch(String keyword, TextFilter textFilter)
+  /**
+   * Given a map of filter(<field, value>), return the filtered list of books
+   * @param filterMap
+   * @param textFilter
+   * @return list of filtered books
+   */
+  public List<PhysicalBook> getByFilterMap(Map<String, String> filterMap, TextFilter textFilter)
   {
-    List<PhysicalBook> retList = new ArrayList<PhysicalBook>();
-  
-    switch (textFilter.toString())
-    {
-      case "ACCURATE":
-        retList = physicalBookRepository.findByKeywordAccurate(keyword);
-        break;
-      case "BEGIN":
-        retList = physicalBookRepository.findByKeywordBegin(keyword);
-        break;
-      case "INCLUDE":
-        retList = physicalBookRepository.findByKeywordInclude(keyword);
-        break;
-      default:
-        break;
-    }
-    return getSortedByRule(retList, keyword);
-  }
-  
-  public List<PhysicalBook> getBySpecifiedSearch(Map<String, String> filterMap)
-  {
-    List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp = null;
+    List<PhysicalBook> retList = new ArrayList<PhysicalBook>(), temp = new ArrayList<PhysicalBook>();
     
     for (Map.Entry<String, String> entry : filterMap.entrySet())
     {
-      // entry: <field, keyword> 
-      temp = physicalBookRepository.findByFieldInclude(entry.getValue(), entry.getKey());
+      if (entry.getValue() != "")
+      {
+        // entry: <field, keyword> 
+        switch (textFilter.toString())
+        {
+          case "INCLUDE":
+            temp = physicalBookRepository.findByFieldInclude(entry.getValue(), entry.getKey());
+            break;
+          case "ACCURATE":
+            temp = physicalBookRepository.findByFieldAccurate(entry.getValue(), entry.getKey());
+            break;
+          case "BEGIN":
+            temp = physicalBookRepository.findByFieldBegin(entry.getValue(), entry.getKey());
+            break;
+          default:
+            break;
+        }
+      }
       
       if (!temp.isEmpty())
       {
