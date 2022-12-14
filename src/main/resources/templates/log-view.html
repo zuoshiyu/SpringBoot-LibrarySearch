@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+  href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.css">
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/common.css">
+<title>Logs</title>
+</head>
+<body onload="loadNavigator();">
+
+  <div class="container" id="navigator"></div>
+
+  <div class="container mt-5" id="main">
+
+    <h2 align="center">Logs</h2>
+
+    <table class="table table-bordered table-sm mt-2" id="table">
+      <thead>
+        <tr>
+          <th>Search String</th>
+          <th>Search Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="log : ${logs}">
+          <td th:text="${log.searchString}"></td>
+          <td th:text="${#calendars.format(log.date, 'dd/MMM/yyyy HH:mm')}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+  <script type="text/javascript"
+    src="js/common.js"></script>
+</body>
+</html>

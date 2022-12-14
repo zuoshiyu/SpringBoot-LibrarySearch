@@ -18,6 +18,7 @@ import ecust.enterprise.librarysearch.business.entities.DigitalBook;
 import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
 import ecust.enterprise.librarysearch.business.services.HotWordService;
+import ecust.enterprise.librarysearch.business.services.LogService;
 import ecust.enterprise.librarysearch.business.services.SearchService;
 import ecust.enterprise.librarysearch.business.util.QRCodeCreator;
 
@@ -28,6 +29,7 @@ public class InfoController
   private SearchService physicalBookService;
   @Autowired
   private DigitalBookService digitalBookService;
+  @Autowired LogService logService;
   
   @GetMapping("/book-info")
   public ModelAndView showBookInfo(String bookId)
@@ -43,7 +45,7 @@ public class InfoController
     
     try
     {
-      Path uploadPath = new File("qrcode").toPath();
+      Path uploadPath = new File("img/qrcode").toPath();
       if (!Files.exists(uploadPath))
       {
         Files.createDirectories(uploadPath);
@@ -54,6 +56,15 @@ public class InfoController
     {
       e.printStackTrace();
     }
+    return mav;
+  }
+  
+  @GetMapping("/logs")
+  public ModelAndView showLogs()
+  {
+    ModelAndView mav = new ModelAndView("log-view");
+    mav.addObject("logs", logService.getAll());
+    
     return mav;
   }
 }

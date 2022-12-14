@@ -40,6 +40,7 @@
     <table class="table table-bordered table-sm mt-2" id="table">
       <thead>
         <tr>
+          <th>Cover</th>
           <th>Title</th>
           <th>ISBN</th>
           <th>Author</th>
@@ -49,6 +50,7 @@
       </thead>
       <tbody>
         <tr th:each="book : ${physicalBooks}" th:field="${l}">
+          <td><img alt="Cover" class="img-responsive" th:src="${book.getCoverPath()}"></td>
           <td th:text="${book.title}"></td>
           <td th:text="${book.isbn}"></td>
           <td th:text="${book.author}"></td>
@@ -59,6 +61,20 @@
       </tbody>
     </table>
   </div>
+  
+  <div id="footer">
+    <div>
+      <label>Recommended Read</label>
+      <p>
+        <img alt="Cover" class="img-responsive"
+          src="img/cover/7-81043-015-7.png">
+      </p>
+      <p>书名：控制工程基础</p>
+      <p>ISBN：7-81043-015-7</p>
+      <p>作者：姚伯威编</p>
+    </div>
+  </div>
+  
   <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script

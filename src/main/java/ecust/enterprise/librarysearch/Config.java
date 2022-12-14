@@ -27,7 +27,7 @@ public class Config implements WebMvcConfigurer
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry)
   {
-    exposeDirectory("qrcode", registry);
+    exposeDirectory("img", registry);
     // The end of directory must not be "/"
   }
 
@@ -60,11 +60,14 @@ public class Config implements WebMvcConfigurer
    */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests()
-    .requestMatchers("/show*", "/add*", "/update*", "/delete*").hasRole("ADMIN") 
-    .requestMatchers("/*search", "/book-info*", "/qrcode/*").hasRole("USER")
-    .requestMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
-    .and().formLogin();
+    http.csrf().disable()
+    .authorizeHttpRequests()
+//    .requestMatchers("/show*", "/add*", "/update*", "/delete*").hasRole("ADMIN") 
+//    .requestMatchers("/*search", "/book-info*", "/qrcode/*").hasRole("USER")
+//    .requestMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
+    .requestMatchers("/", "/css/*", "/js/*", "/img/*", "/show*", 
+        "/add*", "/update*", "/delete*", "/*search", "/book-info*", "/img/**", "/logs").permitAll();
+//    .and().formLogin();
     return http.build();
   }
   

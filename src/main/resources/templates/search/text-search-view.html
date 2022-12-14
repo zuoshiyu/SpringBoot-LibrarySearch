@@ -15,9 +15,27 @@
   <div class="container" id="navigator"></div>
   <div class="container mt-5">
     <h2 align="center">Text Search</h2>
-    <form th:action="@{/textsearch}" method="get">
-      <input type="text" name="keyword" th:value="${keyword}"
-        placeholder="Find by Key Word" size="50">
+    <form th:action="@{/textsearch}" method="post">
+      <label>Title: </label>
+      <input type="text" name="title" placeholder="Title" size="40">
+
+      <label>Author: </label>
+      <input type="text" name="author" placeholder="Author" size="40">
+
+      <label>Bookdex: </label>
+      <input type="text" name="bookdex" placeholder="Bookdex" size="40">
+
+      <label>Sub Title: </label>
+      <input type="text" name="publisher" placeholder="Sub Title"
+        size="40">
+
+      <label>ISBN: </label>
+      <input type="text" name="isbn" placeholder="isbn" size="40">
+
+      <label>Sub Title: </label>
+      <input type="text" name="subtitle" placeholder="Sub Title"
+        size="40">
+        
       <select class="form-control" id="textFilter" name="textFilter">
         <!-- name implies the return name of the variable -->
         <option th:each="textFilter: ${textFilters}"
@@ -30,6 +48,7 @@
     <table class="table table-bordered table-sm mt-2" id="table">
       <thead>
         <tr>
+          <th>Cover</th>
           <th>Title</th>
           <th>ISBN</th>
           <th>Author</th>
@@ -39,6 +58,7 @@
       </thead>
       <tbody>
         <tr th:each="book : ${physicalBooks}" th:field="${l}">
+          <td><img alt="Cover" class="img-responsive" th:src="${book.getCoverPath()}"></td>
           <td th:text="${book.title}"></td>
           <td th:text="${book.isbn}"></td>
           <td th:text="${book.author}"></td>
@@ -49,6 +69,20 @@
       </tbody>
     </table>
   </div>
+  
+  <div id="footer">
+    <div>
+      <label>Recommended Read</label>
+      <p>
+        <img alt="Cover" class="img-responsive"
+          src="img/cover/7-81043-015-7.png">
+      </p>
+      <p>书名：控制工程基础</p>
+      <p>ISBN：7-81043-015-7</p>
+      <p>作者：姚伯威编</p>
+    </div>
+  </div>
+  
   <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script

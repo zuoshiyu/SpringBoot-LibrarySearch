@@ -24,7 +24,7 @@ public class PhysicalBook
   private String author;
   private String publisher;
   private String publocation;
-  private int pubdate;
+  private String pubdate;
   private int pagenum;
   @Id
   private String isbn;
@@ -33,10 +33,25 @@ public class PhysicalBook
   private String type;
   private String language;
   private String subtitle;
+  private String library;
+  private String info;
+  private String authorInfo;
   
   @Transient
   public String getQRCodePath()
   {
-    return "qrcode/" + isbn + ".png";
+    return "img/qrcode/" + isbn + ".png";
+  }
+  
+  @Transient
+  public String getRelevanceString() 
+  {
+    return this.title + this.subtitle + this.author + this.publisher + this.publocation;
+  }
+  
+  @Transient
+  public String getCoverPath()
+  {
+    return "img/cover/" + isbn + ".png";
   }
 }

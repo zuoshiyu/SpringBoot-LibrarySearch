@@ -1,7 +1,10 @@
 $(document).ready(function() {
 	// modify table behavior
 	$("table").DataTable({
-		order: [0, 'desc'],
+		lengthMenu: [
+            [3, 5, 10],
+            [3, 5, 10],
+        ],
 		'aoColumnDefs': [{
 			'bSortable': false,
 			'aTargets': [-1]
@@ -37,6 +40,12 @@ function loadNavigator() {
 	          </li>
 	          <li>
 	            <a href="/oversearch">Over Search</a>
+	          </li>
+	          <li>
+	            <a href="/specifiedsearch">Specified Search</a>
+	          </li>
+	          <li>
+	            <a href="/logs">Search Logs</a>
 	          </li>
 	        </ul>
 	      </li>
