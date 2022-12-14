@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ecust.enterprise.librarysearch.business.entities.PhysicalBook;
 import ecust.enterprise.librarysearch.business.services.DigitalBookService;
 import ecust.enterprise.librarysearch.business.services.HotWordService;
 import ecust.enterprise.librarysearch.business.services.LogService;
@@ -204,4 +206,9 @@ public class SearchController
     }
     return retMap;
   }
+  
+//  private List<PhysicalBook> getRecommended(List<PhysicalBook> physicalBooks)
+//  {
+//    
+//  }
 }
